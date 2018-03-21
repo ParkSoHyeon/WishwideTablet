@@ -53,9 +53,8 @@ public class HeaderFragment extends Fragment implements WishwidePath {
                 .into(imgLogo);
 
         tvHeaderTitle.setText(mTitle);
-//        imgLogo.setImageResource(R.drawable.sample_logo);
-
         ibtnLogout.setVisibility(View.VISIBLE);
+
 
 
 //        Customer customer = NodeSocketClient.getSocketInstance().getCustomer();
@@ -79,16 +78,16 @@ public class HeaderFragment extends Fragment implements WishwidePath {
         ibtnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences sharedPreferences = NodeSocketClient.getSocketInstance().getmSharedPreferences();
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.clear();
-                editor.commit();
-                startActivity(new Intent(getActivity(), LoginActivity.class));
-//                NodeSocketClient.getSocketInstance().resetCustomerInfo();
-//                startActivity(new Intent(getActivity(), HomeActivity.class));
+                showDialog();
+
             }
         });
 
         return headerView;
+    }
+
+    private void showDialog() {
+        PasswordDialogFragment dialog = PasswordDialogFragment.newInstance();
+        dialog.show(getFragmentManager(), PermissionDialogFragment.DIALOG_TAG);
     }
 }

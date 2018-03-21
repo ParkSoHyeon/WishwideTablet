@@ -44,6 +44,11 @@
                   android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
         </activity>
+
+        <service android:name=".StopTaskService"
+                 android:enabled="true"
+                 android:exported="false"
+                 android:stopWithTask="false"/>
     </application>
 
 </manifest>

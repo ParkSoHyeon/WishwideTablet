@@ -76,6 +76,21 @@ public class NodeSocketClient implements NodeSocketClientConstant, SharedPrefere
         return nodeSocketClient;
     }
 
+    public void clearResource() {
+        mActivity = null;
+        mSocket = null;
+        deviceId = null;
+        socketId = null;
+        managerId = null;
+        managerPassword = null;
+        customerPhone = null;
+        partner = null;
+        customer = null;
+        benefit = null;
+        benefitLab = null;
+        nodeSocketClient = null;
+    }
+
     //소켓 설정
     public void initializeConfig() {
         try {
@@ -340,7 +355,7 @@ public class NodeSocketClient implements NodeSocketClientConstant, SharedPrefere
                             info.setiPointVipGoal(objRoot.optInt("pointVipGoal"));
                             info.setStrStoreName(objRoot.optString("wideManagerName"));
                             info.setStrPolicy(objRoot.optString("policy"));
-                            info.setStrPrivacyPolicy(objRoot.optString("privacyPolicy"));
+                            //info.setStrPrivacyPolicy(objRoot.optString("privacyPolicy"));
                             socketId = objRoot.optString("mallSocketId");
 
                             partner = info;

@@ -14,6 +14,6 @@ public class HomeActivity extends WishwideFragmentActivity {
 
     @Override
     protected Fragment createHeaderFragment() {
-        return new HeaderFragment("HOME");
+        return new HeaderFragment("");
     }
 }

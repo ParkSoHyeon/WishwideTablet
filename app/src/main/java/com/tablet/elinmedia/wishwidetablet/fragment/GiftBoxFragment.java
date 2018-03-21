@@ -141,7 +141,7 @@ public class GiftBoxFragment extends Fragment implements NodeSocketClientConstan
             }
             else {
                 imgBenefitUse.setImageResource(R.drawable.benefit_available);
-                tvBenefitUseDate.setVisibility(View.INVISIBLE);
+                tvBenefitUseDate.setVisibility(View.GONE);
                 tvBenefitUseDate.setText("");
             }
 

@@ -11,6 +11,7 @@ import com.tablet.elinmedia.wishwidetablet.R;
 
 public class LoginFailureDialogFragment extends DialogFragment {
     public final static String DIALOG_TAG = "com.elinmedia.adwide.common.LoginFailureDialogFragment";
+    private String mMsg;
 //    private static Context mContext;
 
     public static LoginFailureDialogFragment newInstance(Context context) {
@@ -38,4 +39,6 @@ public class LoginFailureDialogFragment extends DialogFragment {
                 })
                 .create();
     }
+
+
 }

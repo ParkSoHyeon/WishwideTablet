@@ -1,33 +1,20 @@
 package com.tablet.elinmedia.wishwidetablet.activity;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import com.tablet.elinmedia.wishwidetablet.BaseApplication;
-import com.tablet.elinmedia.wishwidetablet.NetworkFetcher;
 import com.tablet.elinmedia.wishwidetablet.R;
 import com.tablet.elinmedia.wishwidetablet.SharedPreferencesConstant;
+import com.tablet.elinmedia.wishwidetablet.StopTaskService;
 import com.tablet.elinmedia.wishwidetablet.fragment.PermissionDialogFragment;
 import com.tablet.elinmedia.wishwidetablet.socket.NodeSocketClient;
-import com.tablet.elinmedia.wishwidetablet.socket.NodeSocketClientConstant;
-import com.tablet.elinmedia.wishwidetablet.vo.Partner;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 
 public class LoadingActivity
         extends AppCompatActivity implements SharedPreferencesConstant {
@@ -43,6 +30,8 @@ public class LoadingActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
+
+        startService(new Intent(this, StopTaskService.class));
 
         //파일 권한 확인
 //        mPermissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
