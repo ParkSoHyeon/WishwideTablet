@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+            android:layout_weight="5"
+            android:layout_width="1000dp"
+            android:layout_height="0px">
+        <android.support.v7.widget.RecyclerView
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/giftbox_recycler_view"
+                android:background="@drawable/round_corner_white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="0px">
+        <Button
+                android:id="@+id/btn_go_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_30"
+                android:textColor="@color/colorWhite"
+                android:background="@drawable/round_corner_red"
+                android:paddingTop="@dimen/activity_margin_16"
+                android:paddingBottom="@dimen/activity_margin_16"
+                android:paddingRight="@dimen/activity_margin_16"
+                android:paddingLeft="@dimen/activity_margin_16"/>
+
+        <Button
+                android:id="@+id/btn_logout"
+                android:layout_marginLeft="@dimen/activity_margin_24"
+                android:textSize="@dimen/text_size_30"
+                android:background="@drawable/round_corner_red"
+                android:paddingTop="@dimen/activity_margin_16"
+                android:paddingBottom="@dimen/activity_margin_16"
+                android:paddingRight="@dimen/activity_margin_16"
+                android:paddingLeft="@dimen/activity_margin_16"
+                android:textColor="@color/colorWhite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_logout"/>
+    </LinearLayout>
+</LinearLayout>
+

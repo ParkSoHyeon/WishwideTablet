@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.tablet.elinmedia.wishwidetablet">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
+            android:name=".BaseApplication"
+            android:allowBackup="true"
+            android:icon="@drawable/logo"
+            android:label="@string/app_name"
+            android:roundIcon="@drawable/logo"
+            android:supportsRtl="true"
+            android:theme="@style/AppTheme">
+
+        <activity android:name=".activity.LoadingActivity"
+                  android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+                  android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.LoginActivity"
+                  android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+                  android:windowSoftInputMode="adjustResize"
+                  android:noHistory="true">
+        </activity>
+
+        <activity android:name=".activity.HomeActivity"
+                  android:windowSoftInputMode="stateAlwaysHidden"
+                  android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+                  android:configChanges="keyboardHidden|screenLayout|">
+
+        </activity>
+
+        <activity android:name=".activity.SearchActivity">
+
+        </activity>
+
+        <activity android:name=".activity.GiftBoxActivity"
+                  android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+        </activity>
+    </application>
+
+</manifest>

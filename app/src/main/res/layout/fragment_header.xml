@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:paddingTop="@dimen/activity_margin_16"
+                android:paddingBottom="@dimen/activity_margin_16"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <ImageView
+            android:id="@+id/img_logo"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    <LinearLayout
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <TextView
+                android:id="@+id/tv_session"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        <ImageButton
+                android:id="@+id/ibtn_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/icon_logout"
+        />
+    </LinearLayout>
+
+
+
+</RelativeLayout>

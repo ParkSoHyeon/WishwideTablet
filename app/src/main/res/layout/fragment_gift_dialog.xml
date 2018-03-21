@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <!--<LinearLayout-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0px">-->
+
+        <!--&lt;!&ndash; 다이얼로그 타이틀 &ndash;&gt;-->
+        <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textAlignment="center"-->
+                <!--android:text="@string/giftDialogTitle"/>-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+            <!--android:layout_weight="5"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0px"-->
+            <!--android:orientation="horizontal">-->
+        <!--<LinearLayout-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_width="0px"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:gravity="center_horizontal">-->
+
+            <!--&lt;!&ndash; 혜택 이미지 &ndash;&gt;-->
+            <!--<ImageView-->
+                    <!--android:id="@+id/img_benefit"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"/>-->
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout-->
+                <!--android:layout_weight="2"-->
+                <!--android:layout_width="0px"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:orientation="vertical">-->
+
+            <!--&lt;!&ndash; 혜택명 &ndash;&gt;-->
+            <!--<TextView-->
+                    <!--android:id="@+id/tv_benefit_title"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"/>-->
+
+            <!--&lt;!&ndash; 혜택 설명 &ndash;&gt;-->
+            <!--<TextView-->
+                    <!--android:id="@+id/tv_benefit_description"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"/>-->
+        <!--</LinearLayout>-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0px">-->
+
+        <!--&lt;!&ndash; 혜택 사용 여부 &ndash;&gt;-->
+        <!--<TextView-->
+                <!--android:id="@+id/tv_benefit_guide"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textAlignment="center"-->
+                <!--android:text="@string/giftDialog"/>-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+            <!--android:layout_weight="2"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0px"-->
+            <!--android:gravity="center">-->
+
+        <!--&lt;!&ndash; 확인 버튼 &ndash;&gt;-->
+        <!--<Button-->
+                <!--android:id="@+id/btnGiftConfirm"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/btnConfirm"/>-->
+
+        <!--&lt;!&ndash; 취소 버튼 &ndash;&gt;-->
+        <!--<Button-->
+                <!--android:id="@+id/btnGiftCancel"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@string/btnCancel"/>-->
+    <!--</LinearLayout>-->
+</LinearLayout>

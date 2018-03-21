@@ -1,0 +1,81 @@
+<resources>
+    <string name="app_name">WishWide</string>
+
+    <!-- 번호키 -->
+    <string name="btnNum0">0</string>
+    <string name="btnNum1">1</string>
+    <string name="btnNum2">2</string>
+    <string name="btnNum3">3</string>
+    <string name="btnNum4">4</string>
+    <string name="btnNum5">5</string>
+    <string name="btnNum6">6</string>
+    <string name="btnNum7">7</string>
+    <string name="btnNum8">8</string>
+    <string name="btnNum9">9</string>
+    <string name="btnDel">←</string>
+    <string name="btnOk">OK</string>
+
+    <!-- 회원가입 -->
+    <string name="joinGuide">성별과 생년월일을 입력해주세요. \n 본 정보는 최초 한 번만 입력하시면 됩니다.</string>
+    <string name="policy">이용약관과 개인정보취급방침에 \n 동의하시면 휴대폰번호 입력 후 \n OK 버튼을 눌러주세요.</string>
+    <string name="gender">성별</string>
+    <string name="phone">전화번호</string>
+    <string name="yearOfBirth">생년</string>
+    <string name="monthOfBirth">월</string>
+    <string name="dateOfBirth">일</string>
+
+    <!-- 힌트 -->
+    <string name="phoneHint">전화번호를 입력해주세요.</string>
+    <string name="yearOfBirthHint">ex) 2000</string>
+    <string name="monthOfBirthHint">ex) 01</string>
+    <string name="dateOfBirthHint">ex) 30</string>
+
+    <!-- 다이얼로그 -->
+    <string name="joinDialog">맞춤형 쿠폰을 받을 수 있도록 개인정보를 입력하시겠습니까?</string>
+    <string name="pass">다음에</string>
+    <string name="input">입력</string>
+
+    <!-- 포인트 -->
+    <string name="pointTitle">포인트 내역</string>
+    <string name="pointUsing">포인트 적립</string>
+    <string name="pointDeduct">포인트 사용</string>
+    <string name="pointTotal">총 포인트 :</string>
+
+    <!-- 선물 -->
+    <string name="btn_go_giftbox">내 쿠폰/선물함 가기</string>
+    <string name="btn_go_search_stamp">도장 조회</string>
+    <string name="btn_go_search_point">포인트 조회</string>
+    <string name="giftDialogTitle">사용하기</string>
+    <string name="giftDialog">위 선물을 사용하시겠습니까?</string>
+    <string name="couponDialog">위 쿠폰을 사용하시겠습니까?</string>
+    <string name="btnConfirm">확인</string>
+    <string name="btnCancel">취소</string>
+    <string name="title_activity_load">LoadActivity</string>
+
+    <!-- 로그인 실패 -->
+    <string name="login_failure_dialog_msg">아이디와 비밀번호를 다시 한번 확인해주세요.</string>
+
+    <!-- Strings related to login -->
+    <string name="title_activity_login">로그인</string>
+    <string name="prompt_id">아이디</string>
+    <string name="prompt_password">비밀번호</string>
+    <string name="prompt_device_id">디바이스 아이디</string>
+    <string name="action_sign_in">로그인</string>
+    <string name="error_invalid_id">아이디를 다시 확인해주세요.</string>
+    <string name="error_invalid_device_id">아이디를 다시 확인해주세요.</string>
+    <string name="error_invalid_password">비밀번호가 너무 깁니다. 비밀번호를 다시 확인해주세요.</string>
+    <string name="error_incorrect_password">아이디와 비밀번호를 다시 확인해주세요.</string>
+    <string name="error_field_required">필수 항목입니다.</string>
+
+    <!-- Dialog -->
+    <string name="dialog_title">안내</string>
+    <string name="dialog_ok">확인</string>
+
+    <!-- 권한 -->
+    <string name="permission_dialog_msg">권한을 허용해주셔야 \nADWIDE 서비스를 이용하실 수 있습니다.</string>
+
+    <!-- 버튼 -->
+    <string name="btn_device_id_register">등록</string>
+    <string name="btn_logout">로그아웃</string>
+
+</resources>

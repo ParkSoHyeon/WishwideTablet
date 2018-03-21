@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0px">
+
+        <!-- 잔여 포인트 안내 -->
+        <TextView
+                android:id="@+id/tv_point_guide"
+                android:textSize="@dimen/text_size_40"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_marginTop="@dimen/activity_margin_16"
+            android:layout_gravity="center|center_vertical"
+            android:layout_weight="3"
+            android:layout_width="1000dp"
+            android:layout_height="0px"
+            android:orientation="vertical">
+
+        <LinearLayout
+                android:background="@drawable/round_corner_red"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0px">
+            <!-- 포인트 내역 안내 -->
+            <TextView
+                    android:textSize="@dimen/text_size_40"
+                    android:textColor="@color/colorWhite"
+                    android:gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/pointTitle"/>
+        </LinearLayout>
+
+        <TableLayout
+                android:padding="@dimen/activity_margin_16"
+                android:layout_weight="2"
+                android:layout_gravity="center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="0px"
+                android:stretchColumns="*">
+
+            <TableRow
+                    android:paddingBottom="@dimen/activity_margin_16">
+                <!-- 포인트 사용 -->
+                <TextView
+                        android:textSize="@dimen/text_size_30"
+                        android:gravity="left"
+                        android:layout_width="0px"
+                        android:layout_height="match_parent"
+                        android:text="@string/pointUsing"/>
+
+                <!-- 포인트 사용 수 -->
+                <TextView
+                        android:textSize="@dimen/text_size_30"
+                        android:gravity="right"
+                        android:id="@+id/tv_point_saving"
+                        android:layout_width="0px"
+                        android:layout_height="match_parent"/>
+            </TableRow>
+            <TableRow
+                    android:paddingBottom="@dimen/activity_margin_16">
+                <!-- 포인트 차감 -->
+                <TextView
+                        android:textSize="@dimen/text_size_30"
+                        android:gravity="left"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pointDeduct"/>
+
+                <!-- 포인트 차감 수 -->
+                <TextView
+                        android:textSize="@dimen/text_size_30"
+                        android:gravity="right"
+                        android:id="@+id/tv_point_deduct"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+            </TableRow>
+            <TableRow>
+                <!-- 총 포인트 -->
+                <TextView
+                        android:textSize="@dimen/text_size_40"
+                        android:gravity="right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pointTotal"/>
+
+                <!-- 총 포인트 수 -->
+                <TextView
+                        android:textSize="@dimen/text_size_40"
+                        android:gravity="right"
+                        android:id="@+id/tv_total_point"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0px"
+            android:gravity="center">
+
+        <Button
+                android:id="@+id/btn_benefit_box"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_30"
+                android:background="@drawable/round_corner_red"
+                android:textColor="@color/colorWhite"
+                android:paddingTop="@dimen/activity_margin_16"
+                android:paddingBottom="@dimen/activity_margin_16"
+                android:paddingRight="@dimen/activity_margin_16"
+                android:paddingLeft="@dimen/activity_margin_16"
+                android:text="@string/btn_go_giftbox"/>
+    </LinearLayout>
+
+</LinearLayout>

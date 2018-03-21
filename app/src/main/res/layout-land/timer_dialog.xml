@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/transparent">
+
+    <LinearLayout
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:background="@drawable/round_corner_red"
+            android:layout_width="400dp"
+            android:layout_height="wrap_content">
+        <TextView
+                android:gravity="center"
+                android:id="@+id/tv_time"
+                android:textSize="@dimen/text_size_40"
+                android:textColor="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        <TextView
+                android:gravity="center"
+                android:text="고객님의 정보 보호를 위해 자동으로 로그아웃 됩니다. \n화면을 터치하면 계속 사용하실 수 있습니다."
+                android:textSize="@dimen/text_size_20"
+                android:textColor="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+    </LinearLayout>
+</RelativeLayout>
