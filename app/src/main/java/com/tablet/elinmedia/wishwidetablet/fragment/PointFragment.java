@@ -85,7 +85,7 @@ public class PointFragment extends Fragment implements NodeSocketClientConstant 
 
         String guide = "";
 
-        guide = PhoneNumberUtils.formatNumber(customer.getStrCustomerPhone()).replace(customer.getStrCustomerPhone().substring(3, 7), "****") + "님의 현재 잔여 포인트는 " + pointAllCnt + "P 입니다!!";
+        guide = customer.getStrCustomerPhone().replaceAll("(\\d{3})(\\d{3,4})(\\d{4})", "$1-****-$3") + "님의 현재 잔여 포인트는 " + pointAllCnt + "P 입니다!!";
 //        guide = "01012345688" + "님의 현재 잔여 포인트는 " + pointAllCnt + "P 입니다!!";
 
         tvPointGuide.setText(guide);

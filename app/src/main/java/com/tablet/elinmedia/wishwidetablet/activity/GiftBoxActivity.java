@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import com.tablet.elinmedia.wishwidetablet.R;
 import com.tablet.elinmedia.wishwidetablet.fragment.GiftBoxFragment;
+import com.tablet.elinmedia.wishwidetablet.fragment.HeaderFragment;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -23,6 +24,13 @@ public class GiftBoxActivity extends WishwideFragmentActivity {
 //
 //    private int mReadyCount = 0;
 //    private int mTimeCount = 5;
+
+
+    @Override
+    protected Fragment createHeaderFragment() {
+        return new HeaderFragment("선물함");
+    }
+
 
     @Override
     protected Fragment createContentFragment() {
@@ -67,6 +75,7 @@ public class GiftBoxActivity extends WishwideFragmentActivity {
 //        }, 3000, 1000);
         return new GiftBoxFragment();
     }
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {

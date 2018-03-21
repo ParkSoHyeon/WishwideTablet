@@ -3,6 +3,7 @@ package com.tablet.elinmedia.wishwidetablet.activity;
 import android.support.v4.app.Fragment;
 import android.view.MotionEvent;
 import android.view.View;
+import com.tablet.elinmedia.wishwidetablet.fragment.HeaderFragment;
 import com.tablet.elinmedia.wishwidetablet.fragment.PointFragment;
 import com.tablet.elinmedia.wishwidetablet.fragment.StampFragment;
 import com.tablet.elinmedia.wishwidetablet.socket.NodeSocketClient;
@@ -17,6 +18,20 @@ public class SearchActivity extends WishwideFragmentActivity {
 //
 //    private int mReadyCount = 0;
 //    private int mTimeCount = 5;
+
+    @Override
+    protected Fragment createHeaderFragment() {
+        String benefitTypeCode = NodeSocketClient.getSocketInstance().getPartner().getStrBenefitTypeCode();
+
+        if (benefitTypeCode.equals("S")) {
+            return new HeaderFragment("도장 현황");
+        }
+        else if (benefitTypeCode.equals("P")) {
+            return new HeaderFragment("포인트 현황");
+        }
+
+        return null;
+    }
 
     @Override
     protected Fragment createContentFragment() {
@@ -74,7 +89,8 @@ public class SearchActivity extends WishwideFragmentActivity {
         return null;
     }
 
-//    @Override
+
+    //    @Override
 //    public boolean onTouchEvent(MotionEvent event) {
 
 //        if (event.getAction() == MotionEvent.ACTION_DOWN) {

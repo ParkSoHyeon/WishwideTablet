@@ -9,6 +9,7 @@ import com.tablet.elinmedia.wishwidetablet.fragment.HeaderFragment;
 public abstract class WishwideFragmentActivity
         extends android.support.v4.app.FragmentActivity {
     protected abstract Fragment createContentFragment();
+    protected abstract Fragment createHeaderFragment();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -21,7 +22,7 @@ public abstract class WishwideFragmentActivity
 
         //헤더 프래그먼트
         if(fragmentHeader == null) {
-            fragmentHeader = new HeaderFragment();
+            fragmentHeader = createHeaderFragment();
             fragmentManager.beginTransaction()
                     .add(R.id.fragment_header, fragmentHeader)
                     .commit();

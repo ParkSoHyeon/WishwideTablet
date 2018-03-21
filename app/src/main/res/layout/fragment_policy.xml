@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@drawable/round_corner_white"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -37,7 +38,7 @@
                             android:id="@+id/tv_policy"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center"/>
+                            android:padding="@dimen/activity_margin_16"/>
 
                 </ScrollView>
 
@@ -49,11 +50,10 @@
                         android:orientation="vertical">
 
                     <TextView
-                            android:id="@+id/tv_private_policy"
+                            android:id="@+id/tv_privacy_policy"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:padding="8dp"/>
+                            android:padding="@dimen/activity_margin_16"/>
                 </ScrollView>
             </FrameLayout>
         </LinearLayout>

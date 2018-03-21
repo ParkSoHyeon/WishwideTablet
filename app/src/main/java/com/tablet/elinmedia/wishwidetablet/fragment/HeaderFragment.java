@@ -11,16 +11,24 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
+import com.squareup.picasso.Picasso;
 import com.tablet.elinmedia.wishwidetablet.R;
 import com.tablet.elinmedia.wishwidetablet.WishwidePath;
 import com.tablet.elinmedia.wishwidetablet.activity.LoginActivity;
 import com.tablet.elinmedia.wishwidetablet.socket.NodeSocketClient;
+import com.tablet.elinmedia.wishwidetablet.vo.Partner;
 
 public class HeaderFragment extends Fragment implements WishwidePath {
     //위젯 선언
     ImageView imgLogo;
-    TextView tvSession;
+    TextView tvSession, tvHeaderTitle;
     ImageButton ibtnLogout;
+
+    private String mTitle;
+
+    public HeaderFragment(String title) {
+        this.mTitle = title;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,15 +42,18 @@ public class HeaderFragment extends Fragment implements WishwidePath {
         //위젯결합
         imgLogo = (ImageView) headerView.findViewById(R.id.img_logo);
         tvSession = (TextView) headerView.findViewById(R.id.tv_session);
+        tvHeaderTitle = (TextView) headerView.findViewById(R.id.tv_header_title);
         ibtnLogout = (ImageButton) headerView.findViewById(R.id.ibtn_logout);
 
 
-//        imgLogo.setImageBitmap(new ImageManager().fileToBitmap(PARTNER_PATH + "logo.png"));
-//        Picasso.with(getActivity()).load(partner.getImgLogoUrl())
-//                .placeholder(R.drawable.logo)
-//                .error(R.drawable.logo)
-//                .into(imgLogo);
-        imgLogo.setImageResource(R.drawable.sample_logo);
+        Partner partner = NodeSocketClient.getSocketInstance().getPartner();
+        Picasso.with(getActivity()).load(partner.getImgLogoUrl())
+                .placeholder(R.drawable.logo)
+                .error(R.drawable.logo)
+                .into(imgLogo);
+
+        tvHeaderTitle.setText(mTitle);
+//        imgLogo.setImageResource(R.drawable.sample_logo);
 
         ibtnLogout.setVisibility(View.VISIBLE);
 

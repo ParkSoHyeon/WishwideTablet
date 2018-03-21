@@ -7,7 +7,15 @@
 
     <ImageView
             android:id="@+id/img_logo"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/activity_margin_16"
+            android:layout_width="150dp"
+            android:layout_height="70dp"/>
+
+    <TextView
+            android:id="@+id/tv_header_title"
             android:layout_centerInParent="true"
+            android:textSize="@dimen/text_size_60"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -16,16 +24,17 @@
             android:layout_centerVertical="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-        <TextView
-                android:id="@+id/tv_session"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+        <!--<TextView-->
+                <!--android:id="@+id/tv_session"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"/>-->
 
         <ImageButton
                 android:id="@+id/ibtn_logout"
+                android:layout_marginRight="@dimen/activity_margin_16"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@drawable/icon_logout"
+                android:layout_height="wrap_content"
+                android:background="@drawable/settings"
                 />
     </LinearLayout>
 

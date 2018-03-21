@@ -339,8 +339,8 @@ public class NodeSocketClient implements NodeSocketClientConstant, SharedPrefere
                             info.setiStampVipGoal(objRoot.optInt("stampVipGoal"));
                             info.setiPointVipGoal(objRoot.optInt("pointVipGoal"));
                             info.setStrStoreName(objRoot.optString("wideManagerName"));
-                            //info.setStrPolicy(objRoot.optString("policy"));
-                            //info.setStrPrivacyPolicy(objRoot.optString("privacyPolicy"));
+                            info.setStrPolicy(objRoot.optString("policy"));
+                            info.setStrPrivacyPolicy(objRoot.optString("privacyPolicy"));
                             socketId = objRoot.optString("mallSocketId");
 
                             partner = info;

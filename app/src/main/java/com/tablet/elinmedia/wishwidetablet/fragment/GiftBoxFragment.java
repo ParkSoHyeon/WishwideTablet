@@ -22,6 +22,7 @@ import com.tablet.elinmedia.wishwidetablet.vo.Benefit;
 import com.tablet.elinmedia.wishwidetablet.vo.BenefitLab;
 import com.tablet.elinmedia.wishwidetablet.vo.Partner;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class GiftBoxFragment extends Fragment implements NodeSocketClientConstant {
@@ -90,6 +91,8 @@ public class GiftBoxFragment extends Fragment implements NodeSocketClientConstan
     private void updateUI() {
         BenefitLab benefitLab = BenefitLab.getInstance();
         List<Benefit> benefits = benefitLab.getmBenefits();
+
+        Arrays.sort(benefits.toArray());
 
         mGiftboxAdapter = new GiftboxAdapter(benefits);
         mGiftBoxRecyclerView.setAdapter(mGiftboxAdapter);

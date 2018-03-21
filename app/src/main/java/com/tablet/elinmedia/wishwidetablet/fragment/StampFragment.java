@@ -97,12 +97,12 @@ public class StampFragment extends Fragment implements NodeSocketClientConstant 
         int i;
 
         for (i = 0; i < stampNowCnt; i++) {
-            Log.d(TAG, "full: " + i);
+//            Log.d(TAG, "full: " + i);
             arrStampImgs[i].setImageResource(R.drawable.full_stamp);      // 이미지를 등록한다.
         }
 
         for (; i < 10; i++) {
-            Log.d(TAG, "empty: " + i);
+//            Log.d(TAG, "empty: " + i);
             arrStampImgs[i].setImageResource(R.drawable.empty_stamp);      // 이미지를 등록한다.
         }
 
@@ -111,10 +111,10 @@ public class StampFragment extends Fragment implements NodeSocketClientConstant 
 
         switch (intent.getStringExtra("responseCode")) {
             case SUCCESS_RESPONSE_CODE:
-                guide = PhoneNumberUtils.formatNumber(customer.getStrCustomerPhone()).replace(customer.getStrCustomerPhone().substring(3, 7), "****") + "님은 지금까지 " + stampNowCnt + "개를 모으셨습니다!!";
+                guide = customer.getStrCustomerPhone().replaceAll("(\\d{3})(\\d{3,4})(\\d{4})", "$1-****-$3") + "님은 지금까지 " + stampNowCnt + "개를 모으셨습니다!!";
                 break;
             case SAVING_AND_COUPON_RESPONSE_CODE:
-                guide = PhoneNumberUtils.formatNumber(customer.getStrCustomerPhone()).replace(customer.getStrCustomerPhone().substring(3, 7), "****") + "님, 축하드립니다!\n 모으신 쿠폰 도장 " + partner.getiStampGoal() + "개는 선물함에 선물로 제공되었습니다.\n 쿠폰 도장 " + stampNowCnt + "개를 모으셨습니다!!";
+                guide = customer.getStrCustomerPhone().replaceAll("(\\d{3})(\\d{3,4})(\\d{4})", "$1-****-$3") + "님, 축하드립니다!\n 모으신 쿠폰 도장 " + partner.getiStampGoal() + "개는 선물함에 선물로 제공되었습니다.\n 쿠폰 도장 " + stampNowCnt + "개를 모으셨습니다!!";
                 break;
         }
 

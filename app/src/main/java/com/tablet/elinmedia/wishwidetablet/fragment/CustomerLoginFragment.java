@@ -21,8 +21,6 @@ public class CustomerLoginFragment extends Fragment implements NodeSocketClientC
     private static final String POLICY_DIALOG = "policyDialog";
     private static final int REQUEST_DATE = 0;
 
-    private String mRealPhone = "";
-
     private ImageView imgBenefitGuide;
     private TextView tvPolicy;
     private LinearLayout llInputPhone;
@@ -124,33 +122,30 @@ public class CustomerLoginFragment extends Fragment implements NodeSocketClientC
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NodeSocketClient nodeSocketClient = NodeSocketClient.getSocketInstance();
+                String purePhone = edtPhone.getText().toString().replace("-", "");
 
-                if (NodeSocketClient.isSocketConnected) {
-                    Log.d(TAG, "서버와 연결 됨");
+                if ((10 < purePhone.length()) && (purePhone.length() < 12)) {
+                    NodeSocketClient nodeSocketClient = NodeSocketClient.getSocketInstance();
 
-                    nodeSocketClient.setmActivity(getActivity());
-                    nodeSocketClient.setCustomerPhone(edtPhone.getText().toString().replace("-", ""));
-                    nodeSocketClient.requestCustomerLogin(edtPhone.getText().toString().replace("-", ""));
+                    if (NodeSocketClient.isSocketConnected) {
+                        Log.d(TAG, "서버와 연결 됨");
+
+                        nodeSocketClient.setmActivity(getActivity());
+                        nodeSocketClient.setCustomerPhone(purePhone);
+                        nodeSocketClient.requestCustomerLogin(purePhone);
+                    }
+                    else {
+                        Log.d(TAG, "서버와 연결 안됨");
+                        nodeSocketClient.connectSocket();
+                        nodeSocketClient.setmActivity(getActivity());
+                        nodeSocketClient.setCustomerPhone(purePhone);
+                        nodeSocketClient.requestCustomerLogin(purePhone);
+                    }
                 }
                 else {
-                    Log.d(TAG, "서버와 연결 안됨");
-                    nodeSocketClient.connectSocket();
-                    nodeSocketClient.setmActivity(getActivity());
-                    nodeSocketClient.setCustomerPhone(edtPhone.getText().toString().replace("-", ""));
-                    nodeSocketClient.requestCustomerLogin(edtPhone.getText().toString().replace("-", ""));
+                    Log.d(TAG, "전화번호 형식 아님");
                 }
 
-//                switch (edtPhone.getText().toString()) {
-//                    case "00":
-//                        Partner.getInstance().setStrBenefitTypeCode("S");
-//                        break;
-//                    case "99":
-//                        Partner.getInstance().setStrBenefitTypeCode("P");
-//                        break;
-//                }
-
-//                startActivity(new Intent(getActivity(), SearchActivity.class));
             }
         });
 
@@ -188,6 +183,7 @@ public class CustomerLoginFragment extends Fragment implements NodeSocketClientC
 //            editText.setText(strTemp);
 //            editText.setSelection(iCurrentCursor + 1);
 //        }
+
     }
 
     private void deleteEditText(EditText editText) {
