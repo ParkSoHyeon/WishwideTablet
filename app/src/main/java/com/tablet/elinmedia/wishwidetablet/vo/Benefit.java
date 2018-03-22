@@ -2,7 +2,7 @@ package com.tablet.elinmedia.wishwidetablet.vo;
 
 import org.joda.time.LocalDateTime;
 
-public class Benefit implements Comparable<Benefit> {
+public class Benefit {
     private int benefitNo;
     private String strBenefitTypeCode;
     private String strBenefitTitle;
@@ -109,18 +109,5 @@ public class Benefit implements Comparable<Benefit> {
 
     public void setBenefitFinishDate(String benefitFinishDate) {
         this.benefitFinishDate = benefitFinishDate;
-    }
-
-
-    @Override
-    public int compareTo(Benefit o) {
-        if (iBenefitUseCode > o.getiBenefitUseCode()) {
-            return 1;
-        }
-        else if (iBenefitUseCode < o.getiBenefitUseCode()) {
-            return -1;
-        }
-
-        return 0;
     }
 }

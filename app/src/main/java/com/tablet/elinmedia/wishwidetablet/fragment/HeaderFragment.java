@@ -1,7 +1,5 @@
 package com.tablet.elinmedia.wishwidetablet.fragment;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,12 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.TabHost;
 import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 import com.tablet.elinmedia.wishwidetablet.R;
-import com.tablet.elinmedia.wishwidetablet.WishwidePath;
-import com.tablet.elinmedia.wishwidetablet.activity.LoginActivity;
+import com.tablet.elinmedia.wishwidetablet.common.WishwidePath;
 import com.tablet.elinmedia.wishwidetablet.socket.NodeSocketClient;
 import com.tablet.elinmedia.wishwidetablet.vo.Partner;
 
@@ -55,8 +51,6 @@ public class HeaderFragment extends Fragment implements WishwidePath {
         tvHeaderTitle.setText(mTitle);
         ibtnLogout.setVisibility(View.VISIBLE);
 
-
-
 //        Customer customer = NodeSocketClient.getSocketInstance().getCustomer();
 //
 //        if (customer != null) {
@@ -78,16 +72,12 @@ public class HeaderFragment extends Fragment implements WishwidePath {
         ibtnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialog();
+                PasswordDialogFragment dialog = PasswordDialogFragment.newInstance();
+                dialog.show(getFragmentManager(), PermissionDialogFragment.DIALOG_TAG);
 
             }
         });
 
         return headerView;
-    }
-
-    private void showDialog() {
-        PasswordDialogFragment dialog = PasswordDialogFragment.newInstance();
-        dialog.show(getFragmentManager(), PermissionDialogFragment.DIALOG_TAG);
     }
 }

@@ -8,8 +8,8 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import com.tablet.elinmedia.wishwidetablet.BaseApplication;
-import com.tablet.elinmedia.wishwidetablet.SharedPreferencesConstant;
+import com.tablet.elinmedia.wishwidetablet.common.BaseApplication;
+import com.tablet.elinmedia.wishwidetablet.common.SharedPreferencesConstant;
 import com.tablet.elinmedia.wishwidetablet.activity.GiftBoxActivity;
 import com.tablet.elinmedia.wishwidetablet.activity.HomeActivity;
 import com.tablet.elinmedia.wishwidetablet.activity.LoginActivity;
@@ -355,7 +355,7 @@ public class NodeSocketClient implements NodeSocketClientConstant, SharedPrefere
                             info.setiPointVipGoal(objRoot.optInt("pointVipGoal"));
                             info.setStrStoreName(objRoot.optString("wideManagerName"));
                             info.setStrPolicy(objRoot.optString("policy"));
-                            //info.setStrPrivacyPolicy(objRoot.optString("privacyPolicy"));
+                            info.setStrPrivacyPolicy(objRoot.optString("privacyPolicy"));
                             socketId = objRoot.optString("mallSocketId");
 
                             partner = info;
@@ -373,24 +373,28 @@ public class NodeSocketClient implements NodeSocketClientConstant, SharedPrefere
                             Log.d(TAG, "서비스 이용 불가");
                             intent = new Intent(mContext, LoginActivity.class);
                             intent.putExtra("responseCode", responseCode);
+                            intent.putExtra("errorMsg", "Wishwide 운영자에게 문의해주세요." + "(코드:" + responseCode + ")");
 
                             break;
                         case DEVICE_UNREGISTER_RESPONSE_CODE:
                             Log.d(TAG, "디바이스 미등록");
                             intent = new Intent(mContext, LoginActivity.class);
                             intent.putExtra("responseCode", responseCode);
+                            intent.putExtra("errorMsg", "디바이스 아이디를 등록해주세요." + "(코드:" + responseCode + ")");
 
                             break;
                         case POS_NOT_LOGIN_RESPONSE_CODE:
                             Log.d(TAG, "POS 로그인 안됌");
                             intent = new Intent(mContext, LoginActivity.class);
                             intent.putExtra("responseCode", responseCode);
+                            intent.putExtra("errorMsg", "POS를 확인해주세요." + "(코드:" + responseCode + ")");
 
                             break;
                         case SERVER_ERROR_RESPONSE_CODE:
                             Log.d(TAG, "서버 통신 오류");
                             intent = new Intent(mContext, LoginActivity.class);
                             intent.putExtra("responseCode", responseCode);
+                            intent.putExtra("errorMsg", "Wishwide 운영자에게 문의해주세요." + "(코드:" + responseCode + ")");
 
                             break;
                     }

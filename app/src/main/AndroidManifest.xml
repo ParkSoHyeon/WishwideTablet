@@ -3,9 +3,10 @@
           package="com.tablet.elinmedia.wishwidetablet">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
 
     <application
-            android:name=".BaseApplication"
+            android:name=".common.BaseApplication"
             android:allowBackup="true"
             android:icon="@drawable/logo"
             android:label="@string/app_name"
@@ -21,6 +22,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+
         </activity>
 
         <activity android:name=".activity.LoginActivity"
@@ -31,8 +33,7 @@
 
         <activity android:name=".activity.HomeActivity"
                   android:windowSoftInputMode="stateAlwaysHidden"
-                  android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-                  android:configChanges="keyboardHidden|screenLayout|">
+                  android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
         </activity>
 
@@ -42,10 +43,9 @@
 
         <activity android:name=".activity.GiftBoxActivity"
                   android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
         </activity>
 
-        <service android:name=".StopTaskService"
+        <service android:name=".common.StopTaskService"
                  android:enabled="true"
                  android:exported="false"
                  android:stopWithTask="false"/>

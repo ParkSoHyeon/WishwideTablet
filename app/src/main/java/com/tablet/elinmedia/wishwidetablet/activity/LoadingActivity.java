@@ -9,10 +9,10 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
-import com.tablet.elinmedia.wishwidetablet.BaseApplication;
+import com.tablet.elinmedia.wishwidetablet.common.BaseApplication;
 import com.tablet.elinmedia.wishwidetablet.R;
-import com.tablet.elinmedia.wishwidetablet.SharedPreferencesConstant;
-import com.tablet.elinmedia.wishwidetablet.StopTaskService;
+import com.tablet.elinmedia.wishwidetablet.common.SharedPreferencesConstant;
+import com.tablet.elinmedia.wishwidetablet.common.StopTaskService;
 import com.tablet.elinmedia.wishwidetablet.fragment.PermissionDialogFragment;
 import com.tablet.elinmedia.wishwidetablet.socket.NodeSocketClient;
 

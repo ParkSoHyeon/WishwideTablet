@@ -1,4 +1,4 @@
-package com.tablet.elinmedia.wishwidetablet;
+package com.tablet.elinmedia.wishwidetablet.common;
 
 import android.app.Activity;
 import android.app.Application;
@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatDialog;
 import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.tablet.elinmedia.wishwidetablet.R;
 
 public class BaseApplication extends Application {
 

@@ -1,5 +1,7 @@
 package com.tablet.elinmedia.wishwidetablet.vo;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,14 +16,15 @@ public class BenefitLab {
 //            Benefit benefit = new Benefit();
 //
 //            benefit.setBenefitNo(21);
-//            benefit.setStrBenefitTypeCode("쿠폰");
-//            benefit.setStrBenefitTitle("오돌뼈 2000원 할인 쿠폰");
+//            benefit.setStrBenefitTypeCode("coupon");
+//            benefit.setStrBenefitTitle("오돌뼈 2000원 할인 ㄴㅁㅇㄻㄴㅇㄹㄴㅇ쿠폰");
 //            benefit.setStrBenefitImageUrl("http://eevcrwzwnqin572958.cdn.ntruss.com/8CbmOvLBoFXbvzAmXbCKNEbKxZFVn9HH.jpg");
 ////                benefit.setStrBenefitDescription(objCoupon.optString(""));
 //            benefit.setBenefitStartDate("2018-03-12");
 //            benefit.setBenefitFinishDate("2018-03-22");
 //            benefit.setStrBenefitUse("사용가능");
-//            benefit.setiBenefitUseCode(0);
+//            benefit.setiBenefitUseCode(1);
+//
 //
 //            mBenefits.add(benefit);
 //        }

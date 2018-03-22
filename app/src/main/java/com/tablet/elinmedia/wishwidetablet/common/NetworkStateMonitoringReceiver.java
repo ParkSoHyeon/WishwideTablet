@@ -1,4 +1,4 @@
-package com.tablet.elinmedia.wishwidetablet;
+package com.tablet.elinmedia.wishwidetablet.common;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;

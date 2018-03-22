@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,10 +23,12 @@ import com.tablet.elinmedia.wishwidetablet.vo.Benefit;
 import com.tablet.elinmedia.wishwidetablet.vo.BenefitLab;
 import com.tablet.elinmedia.wishwidetablet.vo.Partner;
 
-import java.util.Arrays;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class GiftBoxFragment extends Fragment implements NodeSocketClientConstant {
+    private static final String TAG = "GiftBoxFragment";
     private RecyclerView mGiftBoxRecyclerView;
     private Button mBtnGoSearch, mBtnLogout;
     private GiftboxAdapter mGiftboxAdapter;
@@ -91,12 +94,48 @@ public class GiftBoxFragment extends Fragment implements NodeSocketClientConstan
     private void updateUI() {
         BenefitLab benefitLab = BenefitLab.getInstance();
         List<Benefit> benefits = benefitLab.getmBenefits();
+        List<Benefit> availableBenefits = new ArrayList<>();
+        List<Benefit> unavailableBenefits = new ArrayList<>();
 
-        Arrays.sort(benefits.toArray());
+        Collections.sort(benefits, new Comparator<Benefit>() {
+            @Override
+            public int compare(Benefit o1, Benefit o2) {
+                try {
+
+                    Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(o1.getBenefitFinishDate());
+                    Date date2 = new SimpleDateFormat("yyyy-MM-dd").parse(o2.getBenefitFinishDate());
+
+                    return date2.compareTo(date1);
+                } catch (ParseException e) {
+
+                }
+
+                return 0;
+            }
+        });
+
+        for (int i = 0; i < benefits.size(); i++) {
+//            Log.d(TAG, "선물 " + i + ": " + benefitLab.getmBenefits().get(i));
+//            Log.d(TAG, "선물 " + i + " 사용여부: " + benefitLab.getmBenefits().get(i).getiBenefitUseCode());
+            if (benefits.get(i).getiBenefitUseCode() == 0) {
+                //사용 가능
+                availableBenefits.add(benefits.get(i));
+            }
+            else if (benefits.get(i).getiBenefitUseCode() == 1){
+                //사용 완료
+                unavailableBenefits.add(benefits.get(i));
+            }
+        }
+
+        availableBenefits.addAll(unavailableBenefits);
+        benefits.clear();
+        benefits.addAll(availableBenefits);
+
 
         mGiftboxAdapter = new GiftboxAdapter(benefits);
         mGiftBoxRecyclerView.setAdapter(mGiftboxAdapter);
     }
+
 
     private class GiftboxHolder extends RecyclerView.ViewHolder {
         //위젯선언
@@ -134,15 +173,19 @@ public class GiftBoxFragment extends Fragment implements NodeSocketClientConstan
             tvBenefitTitle.setText(mBenefit.getStrBenefitTitle());
             tvBenefitDescription.setText(mBenefit.getStrBenefitDescription());
             tvBenefitExpire.setText(mBenefit.getBenefitStartDate() + " ~ " + mBenefit.getBenefitFinishDate());
-            if (mBenefit.getStrBenefitUse().equals("사용")) {
-                imgBenefitUse.setImageResource(R.drawable.benefit_unavailable);
-                tvBenefitUseDate.setVisibility(View.VISIBLE);
-                tvBenefitUseDate.setText(mBenefit.getBenefitUseDate());
-            }
-            else {
+
+            if (mBenefit.getiBenefitUseCode() == 0) {
+                //사용 가능
                 imgBenefitUse.setImageResource(R.drawable.benefit_available);
                 tvBenefitUseDate.setVisibility(View.GONE);
                 tvBenefitUseDate.setText("");
+            }
+            else {
+                //사용 완료
+                imgBenefitUse.setImageResource(R.drawable.benefit_unavailable);
+                tvBenefitUseDate.setVisibility(View.VISIBLE);
+                tvBenefitUseDate.setText(mBenefit.getBenefitUseDate());
+
             }
 
         }

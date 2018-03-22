@@ -65,6 +65,9 @@ public class PasswordDialogFragment extends DialogFragment {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 }
+                else {
+                    showDialog("비밀번호를 다시 확인해주세요.");
+                }
             }
         });
 
@@ -80,5 +83,11 @@ public class PasswordDialogFragment extends DialogFragment {
                 .create();
     }
 
+
+    private void showDialog(String msg) {
+        MessageDialogFragment messageDialogFragment = MessageDialogFragment.newInstance();
+        messageDialogFragment.setmMsg(msg);
+        messageDialogFragment.show(getFragmentManager(), MessageDialogFragment.DIALOG_TAG);
+    }
 
 }

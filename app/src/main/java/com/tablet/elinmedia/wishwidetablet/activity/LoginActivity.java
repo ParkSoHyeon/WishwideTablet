@@ -6,7 +6,6 @@ import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -19,20 +18,12 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import com.tablet.elinmedia.wishwidetablet.NetworkFetcher;
 import com.tablet.elinmedia.wishwidetablet.R;
-import com.tablet.elinmedia.wishwidetablet.SharedPreferencesConstant;
-import com.tablet.elinmedia.wishwidetablet.fragment.LoginFailureDialogFragment;
+import com.tablet.elinmedia.wishwidetablet.common.SharedPreferencesConstant;
+import com.tablet.elinmedia.wishwidetablet.fragment.MessageDialogFragment;
 import com.tablet.elinmedia.wishwidetablet.socket.NodeSocketClient;
 import com.tablet.elinmedia.wishwidetablet.socket.NodeSocketClientConstant;
-import com.tablet.elinmedia.wishwidetablet.vo.Partner;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.util.regex.Pattern;
 
 public class LoginActivity
@@ -116,25 +107,33 @@ public class LoginActivity
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
+        Intent intent = getIntent();
         String responseCode = "-1";
-        if (getIntent().getStringExtra("responseCode") != null) {
-            responseCode = getIntent().getStringExtra("responseCode");
+        String msg = "";
+        if (intent.getStringExtra("responseCode") != null) {
+            responseCode = intent.getStringExtra("responseCode");
+            msg = intent.getStringExtra("errorMsg");
         }
 
         switch (responseCode) {
             case FAIL_RESPONSE_CODE:
+                showDialog(msg);
                 break;
 
             case POS_NOT_LOGIN_RESPONSE_CODE:
+                showDialog(msg);
                 break;
 
             case SERVER_ERROR_RESPONSE_CODE:
+                showDialog(msg);
                 break;
 
             case DEVICE_UNREGISTER_RESPONSE_CODE:
+                showDialog(msg);
                 break;
 
             case SERVICE_EXPIRE_RESPONSE_CODE:
+                showDialog(msg);
                 break;
         }
     }
@@ -254,9 +253,10 @@ public class LoginActivity
         }
     }
 
-    private void showDialog() {
-        LoginFailureDialogFragment loginFailureDialogFragment = LoginFailureDialogFragment.newInstance(this);
-        loginFailureDialogFragment.show(getSupportFragmentManager(), LoginFailureDialogFragment.DIALOG_TAG);
+    private void showDialog(String msg) {
+        MessageDialogFragment messageDialogFragment = MessageDialogFragment.newInstance();
+        messageDialogFragment.setmMsg(msg);
+        messageDialogFragment.show(getSupportFragmentManager(), MessageDialogFragment.DIALOG_TAG);
     }
 }
 

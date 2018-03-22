@@ -1,4 +1,4 @@
-package com.tablet.elinmedia.wishwidetablet;
+package com.tablet.elinmedia.wishwidetablet.common;
 
 public interface SharedPreferencesConstant {
     public static final String PREFERENCES_NAME = "ElinmediaWishwideTablet";
