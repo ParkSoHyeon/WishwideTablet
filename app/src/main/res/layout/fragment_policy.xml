@@ -36,6 +36,7 @@
 
                     <TextView
                             android:id="@+id/tv_policy"
+                            android:textSize="@dimen/text_size_20"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/activity_margin_16"/>
@@ -51,6 +52,7 @@
 
                     <TextView
                             android:id="@+id/tv_privacy_policy"
+                            android:textSize="@dimen/text_size_20"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:padding="@dimen/activity_margin_16"/>

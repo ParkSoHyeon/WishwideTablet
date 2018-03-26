@@ -35,8 +35,8 @@
 
             <ImageView
                     android:id="@+id/img_benefit_item"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"/>
+                    android:layout_width="200dp"
+                    android:layout_height="180dp"/>
         </LinearLayout>
 
         <!-- 혜택 내용 -->
@@ -68,6 +68,7 @@
                     android:gravity="center_vertical">
                 <TextView
                         android:id="@+id/tv_benefit_description"
+                        android:maxLines="1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
             </LinearLayout>

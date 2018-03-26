@@ -76,13 +76,14 @@ public class LoginActivity
                 nodeSocketClient.setmSharedPreferences(mSharedPreferences);
 
                 if (NodeSocketClient.isSocketConnected == true) {
+                    Log.d(TAG, "isSocketConnected true");
                     nodeSocketClient.requestPartnerLogin();
                 }
                 else {
+                    Log.d(TAG, "isSocketConnected false");
                     nodeSocketClient.connectSocket();
                 }
 
-//                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
             }
         });
 

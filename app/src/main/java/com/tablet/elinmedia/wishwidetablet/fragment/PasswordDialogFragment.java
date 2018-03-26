@@ -13,12 +13,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import com.tablet.elinmedia.wishwidetablet.R;
 import com.tablet.elinmedia.wishwidetablet.activity.LoginActivity;
 import com.tablet.elinmedia.wishwidetablet.socket.NodeSocketClient;
 
 public class PasswordDialogFragment extends DialogFragment {
     public final static String DIALOG_TAG = "com.elinmedia.adwide.common.PasswordDialogFragment";
+    private TextView mTvId;
     private EditText mEdtPassword;
     private Button mBtnOK, mBtnCancle;
 
@@ -34,14 +36,19 @@ public class PasswordDialogFragment extends DialogFragment {
         View passwordDialog = LayoutInflater.from(getActivity())
                 .inflate(R.layout.password_confirm_dialog, null);
 
+        mTvId = (TextView) passwordDialog.findViewById(R.id.tv_id);
         mEdtPassword = (EditText) passwordDialog.findViewById(R.id.edt_password);
         mBtnOK = (Button) passwordDialog.findViewById(R.id.btn_ok);
         mBtnCancle = (Button) passwordDialog.findViewById(R.id.btn_cancle);
 
+        final NodeSocketClient nodeSocketClient = NodeSocketClient.getSocketInstance();
+
+        mTvId.setText(nodeSocketClient.getPartner().getStrWideManagerId());
+
         mBtnOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NodeSocketClient nodeSocketClient = NodeSocketClient.getSocketInstance();
+
 
                 if (nodeSocketClient.getManagerPassword().equals(mEdtPassword.getText().toString())) {
                    //저장되어 있는 아이디, 비밀번호, 디바이스 아이디 정보 clear

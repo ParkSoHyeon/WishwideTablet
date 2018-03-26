@@ -42,9 +42,9 @@
     <string name="pointTotal">총 포인트 :</string>
 
     <!-- 선물 -->
-    <string name="btn_go_giftbox">내 쿠폰/선물함 가기</string>
-    <string name="btn_go_search_stamp">도장 조회</string>
-    <string name="btn_go_search_point">포인트 조회</string>
+    <string name="btn_go_giftbox">내 쿠폰/선물함</string>
+    <string name="btn_go_search_stamp">내 도장 조회</string>
+    <string name="btn_go_search_point">내 포인트 조회</string>
     <string name="giftDialogTitle">사용하기</string>
     <string name="giftDialog">위 선물을 사용하시겠습니까?</string>
     <string name="couponDialog">위 쿠폰을 사용하시겠습니까?</string>

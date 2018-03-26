@@ -36,7 +36,6 @@ public class NodeSocketClient implements NodeSocketClientConstant, SharedPrefere
 
     private SharedPreferences mSharedPreferences;
 
-    //    private final IBinder mService;
     private final Context mContext = BaseApplication.getInstance().getmContext();
 
     private Activity mActivity;
@@ -56,14 +55,8 @@ public class NodeSocketClient implements NodeSocketClientConstant, SharedPrefere
     public static boolean isSocketConnected = false;
 
 
-//    private NodeSocketClient(IBinder service, Context context) {
-//        mContext = context;
-//        mService = service;
-//        initializeConfig();
-//    }
-
-
     private NodeSocketClient() {
+        Log.d(TAG, "NodeSocketClient 객체 성공!");
         initializeConfig();
     }
 
@@ -93,15 +86,14 @@ public class NodeSocketClient implements NodeSocketClientConstant, SharedPrefere
 
     //소켓 설정
     public void initializeConfig() {
+        Log.d(TAG, "initializeConfig()...");
         try {
             mSocket = IO.socket(SERVER_URL);
 
             mSocket.on(Socket.EVENT_CONNECT, onConnect);
             mSocket.on(Socket.EVENT_DISCONNECT, onDisconnect);
             mSocket.on(Socket.EVENT_CONNECT_TIMEOUT, onConnectTimeout);
-//            mSocket.on(SERVER_STATE_EVENT_CODE, onServerStateReceived);
 
-//            mSocket.on(RESPONSE_PARTNER_LOGIN_EVENT_CODE, onPartnerLoginReceived);
             mSocket.on(RESPONSE_POS_EVENT_CODE, onPosReceived);
             mSocket.on(RESPONSE_PARTNER_LOGOUT_EVENT_CODE, onPartnerLogoutReceived);
             mSocket.on(RESPONSE_CUSTOMER_LOGOUT_EVENT_CODE, onCustomerLogoutReceived);
@@ -109,6 +101,8 @@ public class NodeSocketClient implements NodeSocketClientConstant, SharedPrefere
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
+
+
     }
 
 
@@ -116,8 +110,6 @@ public class NodeSocketClient implements NodeSocketClientConstant, SharedPrefere
     public void connectSocket() {
         Log.d(TAG, "connectSocket()...");
         mSocket.connect();
-
-
     }
 
 
@@ -167,8 +159,6 @@ public class NodeSocketClient implements NodeSocketClientConstant, SharedPrefere
             Log.d(TAG, "서버와 연결 끊김");
 
             isSocketConnected = false;
-
-//            disconnectSocket();
         }
     };
 
@@ -204,6 +194,7 @@ public class NodeSocketClient implements NodeSocketClientConstant, SharedPrefere
 
                         if (benefitType.equals("stamp")) {
                             customer.setiStampNowCnt(objRoot.optInt("stampNowCnt"));
+                            customer.setiStampGivingCnt(objRoot.optInt("stampGivingCnt"));
 
                         } else if (benefitType.equals("point")) {
                             customer.setiPointInsCnt( objRoot.optInt("pointInsCnt"));

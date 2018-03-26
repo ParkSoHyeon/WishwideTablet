@@ -24,10 +24,10 @@ public class SearchActivity extends WishwideFragmentActivity {
         String benefitTypeCode = NodeSocketClient.getSocketInstance().getPartner().getStrBenefitTypeCode();
 
         if (benefitTypeCode.equals("S")) {
-            return new HeaderFragment("도장 현황");
+            return new HeaderFragment("내 도장 현황");
         }
         else if (benefitTypeCode.equals("P")) {
-            return new HeaderFragment("포인트 현황");
+            return new HeaderFragment("내 포인트 현황");
         }
 
         return null;

@@ -68,6 +68,7 @@ public class StampFragment extends Fragment implements NodeSocketClientConstant 
 
 //        int stampNowCnt = 3;
         int stampNowCnt = customer.getiStampNowCnt();
+        int stampGivingCnt = customer.getiStampGivingCnt();
         Log.d(TAG, "stampNowCnt: " + stampNowCnt);
 
         //내 선물/쿠폰함 가기 버튼 리스너
@@ -111,10 +112,10 @@ public class StampFragment extends Fragment implements NodeSocketClientConstant 
 
         switch (intent.getStringExtra("responseCode")) {
             case SUCCESS_RESPONSE_CODE:
-                guide = customer.getStrCustomerPhone().replaceAll("(\\d{3})(\\d{3,4})(\\d{4})", "$1-****-$3") + "님은 지금까지 " + stampNowCnt + "개를 모으셨습니다!!";
+                guide = customer.getStrCustomerPhone().replaceAll("(\\d{3})(\\d{3,4})(\\d{4})", "$1-****-$3") + "님은 현재까지 쿠폰 도장 " + stampNowCnt + "개를 모으셨습니다!!";
                 break;
             case SAVING_AND_COUPON_RESPONSE_CODE:
-                guide = customer.getStrCustomerPhone().replaceAll("(\\d{3})(\\d{3,4})(\\d{4})", "$1-****-$3") + "님, 축하드립니다!\n 모으신 쿠폰 도장 " + partner.getiStampGoal() + "개는 선물함에 선물로 제공되었습니다.\n 쿠폰 도장 " + stampNowCnt + "개를 모으셨습니다!!";
+                guide = customer.getStrCustomerPhone().replaceAll("(\\d{3})(\\d{3,4})(\\d{4})", "$1-****-$3") + "님은 새로 쿠폰 도장 " + stampGivingCnt + "개를 받으셨습니다. \n현재까지 적립된 쿠폰 도장 수는 총 " + stampNowCnt + "개 입니다!!";
                 break;
         }
 

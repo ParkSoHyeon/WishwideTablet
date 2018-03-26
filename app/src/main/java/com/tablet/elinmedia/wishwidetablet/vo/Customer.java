@@ -3,7 +3,7 @@ package com.tablet.elinmedia.wishwidetablet.vo;
 import android.content.Context;
 
 public class Customer {
-    public static Customer sCustomer;
+//    public static Customer sCustomer;
     private int customerNo;
     private String strCustomerPhone;
     private String strCustomerGrade;
@@ -13,6 +13,7 @@ public class Customer {
     private String strCustomerBenefitType;
     private String strCustomerBenefitValue;
     private int strCustomerReceiveGiftCnt;
+    private int iStampGivingCnt = 0;
     private int iStampNowCnt = 0;
     private int iPointInsCnt = 0;
     private int iPointUseCnt = 0;
@@ -140,5 +141,13 @@ public class Customer {
 
     public void setiPointAllCnt(int iPointAllCnt) {
         this.iPointAllCnt = iPointAllCnt;
+    }
+
+    public int getiStampGivingCnt() {
+        return iStampGivingCnt;
+    }
+
+    public void setiStampGivingCnt(int iStampGivingCnt) {
+        this.iStampGivingCnt = iStampGivingCnt;
     }
 }

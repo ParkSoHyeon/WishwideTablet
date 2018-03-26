@@ -53,8 +53,6 @@ public class LoadingActivity
         Log.d(TAG, "관리자 비밀번호: " + managerPassword);
         Log.d(TAG, "관리자 디바이스 아이디: " + deviceId);
 
-//        startActivity(new Intent(LoadingActivity.this, LoginActivity.class));
-
         //없으면 로그인 activity로 이동
         if (TextUtils.isEmpty(managerId) || TextUtils.isEmpty(managerPassword) || TextUtils.isEmpty(deviceId)) {
             Log.d(TAG, "자동 로그인 실패, 로그인 페이지로 이동");
