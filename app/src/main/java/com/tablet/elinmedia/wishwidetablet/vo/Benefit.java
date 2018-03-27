@@ -1,7 +1,5 @@
 package com.tablet.elinmedia.wishwidetablet.vo;
 
-import org.joda.time.LocalDateTime;
-
 public class Benefit {
     private int benefitNo;
     private String strBenefitTypeCode;

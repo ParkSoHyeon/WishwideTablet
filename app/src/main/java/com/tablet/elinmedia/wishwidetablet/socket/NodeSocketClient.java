@@ -501,11 +501,21 @@ public class NodeSocketClient implements NodeSocketClientConstant, SharedPrefere
 
                 Benefit benefit = new Benefit();
 
+                String description = "";
+
                 benefit.setBenefitNo(objCoupon.optInt("customer_couponproduct_no"));
                 benefit.setStrBenefitTypeCode(objCoupon.optString("type"));
                 benefit.setStrBenefitTitle(objCoupon.optString("coupon_title"));
                 benefit.setStrBenefitImageUrl(objCoupon.optString("product_image_url"));
-//                benefit.setStrBenefitDescription(objCoupon.optString(""));
+                if (objCoupon.optString("coupon_discount_type_code").equals("DCP")) {
+                    description = objCoupon.optString("product_title") + " " + objCoupon.optString("coupon_discount_value") + "원 할인";
+                }
+                else if (objCoupon.optString("coupon_discount_type_code").equals("DCR")) {
+                    description = objCoupon.optString("product_title") + " " + objCoupon.optString("coupon_discount_value") + "% 할인";
+                }
+
+                benefit.setStrBenefitDescription(description);
+
                 benefit.setBenefitUseDate(objCoupon.optString("customer_couponproduct_use_date"));
                 benefit.setBenefitStartDate(objCoupon.optString("customer_couponproduct_begin_date"));
                 benefit.setBenefitFinishDate(objCoupon.optString("customer_couponproduct_finish_date"));

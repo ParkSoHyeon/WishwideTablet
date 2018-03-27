@@ -28,7 +28,7 @@ public class GiftBoxActivity extends WishwideFragmentActivity {
 
     @Override
     protected Fragment createHeaderFragment() {
-        return new HeaderFragment("내 선물함");
+        return new HeaderFragment("내 쿠폰/선물함");
     }
 
 

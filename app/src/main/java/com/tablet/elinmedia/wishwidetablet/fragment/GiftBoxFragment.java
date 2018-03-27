@@ -172,16 +172,32 @@ public class GiftBoxFragment extends Fragment implements NodeSocketClientConstan
                     .into(imgBenefitItem);
             tvBenefitTitle.setText(mBenefit.getStrBenefitTitle());
             tvBenefitDescription.setText(mBenefit.getStrBenefitDescription());
-            tvBenefitExpire.setText(mBenefit.getBenefitStartDate() + " ~ " + mBenefit.getBenefitFinishDate());
+            tvBenefitExpire.setText(" ~ " + mBenefit.getBenefitFinishDate());
+
+            imgBenefitUse.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mBenefit.getiBenefitUseCode() == 0) {
+                        //사용 가능
+                        showDialog("사용하시려면 카운터에 문의하십시오.");
+                    }
+                }
+            });
 
             if (mBenefit.getiBenefitUseCode() == 0) {
                 //사용 가능
+                imgBenefitUse.setMinimumWidth(150);
+                imgBenefitUse.setMinimumHeight(100);
                 imgBenefitUse.setImageResource(R.drawable.benefit_available);
                 tvBenefitUseDate.setVisibility(View.GONE);
                 tvBenefitUseDate.setText("");
+
+
             }
             else {
                 //사용 완료
+                imgBenefitUse.setMinimumWidth(150);
+                imgBenefitUse.setMinimumHeight(100);
                 imgBenefitUse.setImageResource(R.drawable.benefit_unavailable);
                 tvBenefitUseDate.setVisibility(View.VISIBLE);
                 tvBenefitUseDate.setText(mBenefit.getBenefitUseDate());
@@ -189,6 +205,12 @@ public class GiftBoxFragment extends Fragment implements NodeSocketClientConstan
             }
 
         }
+    }
+
+    private void showDialog(String msg) {
+        MessageDialogFragment messageDialogFragment = MessageDialogFragment.newInstance();
+        messageDialogFragment.setmMsg(msg);
+        messageDialogFragment.show(getFragmentManager(), MessageDialogFragment.DIALOG_TAG);
     }
 
     private class GiftboxAdapter extends RecyclerView.Adapter<GiftboxHolder> {

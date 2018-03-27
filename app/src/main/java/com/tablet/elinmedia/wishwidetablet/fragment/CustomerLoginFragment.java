@@ -3,6 +3,7 @@ package com.tablet.elinmedia.wishwidetablet.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.telephony.PhoneNumberUtils;
 import android.text.InputType;
 import android.util.Log;
@@ -57,6 +58,7 @@ public class CustomerLoginFragment extends Fragment implements NodeSocketClientC
         btnDelete = (Button) customerLoginView.findViewById(R.id.btn_delete);
         btnOk = (Button) customerLoginView.findViewById(R.id.btn_ok);
 
+
         for (i = 0; i < arrBtnNumIds.length; i++) {
             arrNumBtns[i] = (Button) customerLoginView.findViewById(arrBtnNumIds[i]);
         }
@@ -72,7 +74,8 @@ public class CustomerLoginFragment extends Fragment implements NodeSocketClientC
 
                     if (edtPhone.isFocused()) {
                         //핸드폰 입력창
-                        setEditText(edtPhone, index);
+                        addToken();
+                        setEditText(index);
 
 //                        if(edtPhone.length() > 13) {
 //                            btnOk.setTextIsSelectable(true);
@@ -113,7 +116,7 @@ public class CustomerLoginFragment extends Fragment implements NodeSocketClientC
             @Override
             public void onClick(View v) {
                 if(edtPhone.isFocused()) {
-                    deleteEditText(edtPhone);
+                    deleteEditText();
                 }
             }
         });
@@ -153,26 +156,28 @@ public class CustomerLoginFragment extends Fragment implements NodeSocketClientC
         return customerLoginView;
     }
 
+
+
     @Override
     public void onDestroy() {
         super.onDestroy();
 
     }
 
-    private void setEditText(EditText editText, int index) {
+    private void setEditText(int index) {
         String strTemp, strBefore, strAfter;
         int iCurrentCursor, iLength;
 
         //현재 커서, 텍스트 크기 얻기
-        iCurrentCursor = editText.getSelectionEnd();
-        iLength = editText.length();
+        iCurrentCursor = edtPhone.getSelectionEnd();
+        iLength = edtPhone.length();
 
         //커서 위치에 따른 텍스트 삽입
         if(iCurrentCursor == iLength) {
             //마지막 커서
-            strTemp = PhoneNumberUtils.formatNumber(editText.getText().toString() + arrNumBtns[index].getText().toString());
-            editText.setText(strTemp);
-            editText.setSelection(strTemp.length());
+            strTemp = edtPhone.getText().toString() + arrNumBtns[index].getText().toString();
+            edtPhone.setText(strTemp);
+            edtPhone.setSelection(strTemp.length());
         }
 //        else {
 //            //사용자 지정 커서
@@ -186,13 +191,21 @@ public class CustomerLoginFragment extends Fragment implements NodeSocketClientC
 
     }
 
-    private void deleteEditText(EditText editText) {
+    private void addToken() {
+        boolean isAddToken = (edtPhone.getText().length() == 3) || (edtPhone.getText().length() == 8);
+        if (isAddToken) {
+            edtPhone.setText(edtPhone.getText() + "-");
+        }
+        edtPhone.setSelection(edtPhone.getText().length());
+    }
+
+    private void deleteEditText() {
         String strTemp, strBefore, strAfter;
         int iCurrentCursor, iLength;
 
         //현재 커서, 텍스트 크기 얻기
-        iCurrentCursor = editText.getSelectionEnd();
-        iLength = editText.length();
+        iCurrentCursor = edtPhone.getSelectionEnd();
+        iLength = edtPhone.length();
 
         //언더플로우 방지
         if(iLength == 0) {
@@ -202,19 +215,19 @@ public class CustomerLoginFragment extends Fragment implements NodeSocketClientC
         //커서 위치에 따른 텍스트 삽입
         if(iCurrentCursor == iLength) {
             //마지막 커서
-            strTemp = editText.getText().toString();
+            strTemp = edtPhone.getText().toString();
 
             if ((iLength - 2) < 0) {    //언더플로우 방지
-                editText.setText(strTemp.substring(0, iLength - 1));
-                editText.setSelection(strTemp.length() - 1);
+                edtPhone.setText(strTemp.substring(0, iLength - 1));
+                edtPhone.setSelection(strTemp.length() - 1);
             }
-            else if (("" + editText.getText().toString().charAt(iLength - 2)).equals("-")) {    //"-" 지우기
-                editText.setText(strTemp.substring(0, iLength - 2));
-                editText.setSelection(strTemp.length() - 2);
+            else if (("" + edtPhone.getText().toString().charAt(iLength - 2)).equals("-")) {    //"-" 지우기
+                edtPhone.setText(strTemp.substring(0, iLength - 2));
+                edtPhone.setSelection(strTemp.length() - 2);
             }
             else {
-                editText.setText(strTemp.substring(0, iLength - 1));
-                editText.setSelection(strTemp.length() - 1);
+                edtPhone.setText(strTemp.substring(0, iLength - 1));
+                edtPhone.setSelection(strTemp.length() - 1);
             }
 
         }
@@ -228,4 +241,6 @@ public class CustomerLoginFragment extends Fragment implements NodeSocketClientC
 //            editText.setSelection(iCurrentCursor - 1);
 //        }
     }
+
+
 }

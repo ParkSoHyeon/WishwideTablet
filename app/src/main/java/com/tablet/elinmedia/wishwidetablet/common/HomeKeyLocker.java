@@ -38,8 +38,7 @@ public class HomeKeyLocker {
         public OverlayDialog(Activity activity) {
             super(activity, R.style.OverlayDialog);
             WindowManager.LayoutParams params = getWindow().getAttributes();
-            Log.d(TAG, "윈도우 속성 확인: " + params);
-            params.type = TYPE_SYSTEM_OVERLAY;
+            params.type = TYPE_SYSTEM_ERROR;
             params.dimAmount = 0.0F; // transparent
             params.width = 0;
             params.height = 0;

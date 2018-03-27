@@ -115,7 +115,7 @@ public class StampFragment extends Fragment implements NodeSocketClientConstant 
                 guide = customer.getStrCustomerPhone().replaceAll("(\\d{3})(\\d{3,4})(\\d{4})", "$1-****-$3") + "님은 현재까지 쿠폰 도장 " + stampNowCnt + "개를 모으셨습니다!!";
                 break;
             case SAVING_AND_COUPON_RESPONSE_CODE:
-                guide = customer.getStrCustomerPhone().replaceAll("(\\d{3})(\\d{3,4})(\\d{4})", "$1-****-$3") + "님은 새로 쿠폰 도장 " + stampGivingCnt + "개를 받으셨습니다. \n현재까지 적립된 쿠폰 도장 수는 총 " + stampNowCnt + "개 입니다!!";
+                guide = customer.getStrCustomerPhone().replaceAll("(\\d{3})(\\d{3,4})(\\d{4})", "$1-****-$3") + "님은 새로 쿠폰 도장 " + 1 + "개를 받으셨습니다. \n현재까지 적립된 쿠폰 도장 수는 총 " + stampNowCnt + "개 입니다!!";
                 break;
         }
 

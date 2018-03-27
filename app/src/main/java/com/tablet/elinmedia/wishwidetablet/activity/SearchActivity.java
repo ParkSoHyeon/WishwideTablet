@@ -77,7 +77,7 @@ public class SearchActivity extends WishwideFragmentActivity {
 //                });
 //
 //            }
-//        }, 3000, 1000);
+//        }, 5000, 1200);
 
         if (benefitTypeCode.equals("S")) {
             return new StampFragment();
