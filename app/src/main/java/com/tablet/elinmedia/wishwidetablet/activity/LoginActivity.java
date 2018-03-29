@@ -44,6 +44,9 @@ public class LoginActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        final NodeSocketClient nodeSocketClient = NodeSocketClient.getSocketInstance();
+        nodeSocketClient.setmActivity(this);
+
         mSharedPreferences = this.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
 
         // Set up the login form.
@@ -68,8 +71,6 @@ public class LoginActivity
             @Override
             public void onClick(View view) {
                 attemptLogin();
-
-                NodeSocketClient nodeSocketClient = NodeSocketClient.getSocketInstance();
                 nodeSocketClient.setManagerId(mEdtId.getText().toString());
                 nodeSocketClient.setManagerPassword(mEdtPassword.getText().toString());
                 nodeSocketClient.setDeviceId(mEdtDeviceId.getText().toString());

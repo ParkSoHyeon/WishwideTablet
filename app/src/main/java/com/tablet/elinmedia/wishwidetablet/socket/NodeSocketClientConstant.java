@@ -1,8 +1,8 @@
 package com.tablet.elinmedia.wishwidetablet.socket;
 
 public interface NodeSocketClientConstant {
-    public static final String SERVER_URL = "http://49.236.137.39:5000";
-//    public static final String SERVER_URL = "http://192.168.0.2:5000";
+//    public static final String SERVER_URL = "http://49.236.137.39:5000";
+    public static final String SERVER_URL = "http://192.168.0.2:5000";
 
     public static final String REQUEST_PARTNER_LOGIN_EVENT_CODE = "tabletLoginDeviceInsData";   //파트너로그인요청(JOIN)
     public static final String REQUEST_CUSTOMER_LOGIN_EVENT_CODE = "tabletSearchCustomer";  //고객로그인요청

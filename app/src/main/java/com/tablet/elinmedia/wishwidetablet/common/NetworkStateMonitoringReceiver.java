@@ -8,16 +8,15 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.os.IBinder;
 import android.util.Log;
+import com.tablet.elinmedia.wishwidetablet.socket.NodeSocketClient;
 
 import static android.content.Context.CONNECTIVITY_SERVICE;
 
 public class NetworkStateMonitoringReceiver
-        extends BroadcastReceiver implements SharedPreferencesConstant {
-    private static final String TAG = "NetworkStateMonitor";
+        extends BroadcastReceiver {
+    private static final String TAG = "NetworkStateMonitoring";
+
     private Activity mActivity;
-
-    private SharedPreferences mSharedPreferences;
-
     private IBinder mService;
 
 
@@ -26,14 +25,22 @@ public class NetworkStateMonitoringReceiver
         mService = service;
     }
 
+
     public NetworkStateMonitoringReceiver(Activity activity) {
         this.mActivity = activity;
     }
 
 
+    public NetworkStateMonitoringReceiver(){
+        super();
+    }
+
     @Override
     public void onReceive(Context context, Intent intent) {
         String action= intent.getAction();
+
+        Log.d(TAG, "액션 확인: " + action);
+
 
         if (action.equals(ConnectivityManager.CONNECTIVITY_ACTION)) {
             try {
@@ -45,22 +52,11 @@ public class NetworkStateMonitoringReceiver
 
                 if (isNetworkConnected) {
                     Log.i(TAG, "네트워크 연결됨");
-//                    sendNetworkConnectMessageToService();
-
-                    //node server 최신 스케줄 여부 요청
-//                    mSharedPreferences = context.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
-//                    String deviceId = mSharedPreferences.getString(MANAGER_DEVICE_ID_KEY, "");
-//                    String deviceMacAddress = mSharedPreferences.getString(MANAGER_DEVICE_MAC_ADDRESS_KEY, "");
-
-//                    Log.d(TAG, "소켓 통신 전, 디바이스 아이디 확인: " + deviceId);
-//                    Log.d(TAG, "소켓 통신 전, 디바이스 맥주소 확인: " + deviceMacAddress);
-
-                    //최신 스케줄, 디바이스아이디 보냄(+디바이스맥주소)
-//                    NodeSocketClient nodeSocketClient = new NodeSocketClient();
+                    NodeSocketClient.getSocketInstance().progressOFF();
                 }
                 else {
                     Log.i(TAG, "네트워크 끊김");
-//                    sendNetworkDisconnectMessageToService();
+                    NodeSocketClient.getSocketInstance().progressON("네트워크 확인 중...");
                 }
             } catch (Exception e) {
                 e.getStackTrace();
@@ -68,36 +64,6 @@ public class NetworkStateMonitoringReceiver
             }
         }
     }
-
-//    private void sendNetworkDisconnectMessageToService() {
-//        Log.i(TAG, "NetworkingStateMonitor -> Service, 핸들러 메시지 보냄");
-//        if (ScheduleService.isRunning()) {
-//            Messenger serviceMessenger = new Messenger(mService);
-//
-//            try {
-//                Message message = Message.obtain(null, ScheduleService.MSG_NETWORK_DISCONNECT);
-//                message.replyTo = serviceMessenger;
-//                serviceMessenger.send(message);
-//            } catch (RemoteException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
-//
-//    private void sendNetworkConnectMessageToService() {
-//        Log.i(TAG, "NetworkingStateMonitor -> Service, 핸들러 메시지 보냄");
-//        if (ScheduleService.isRunning()) {
-//            Messenger serviceMessenger = new Messenger(mService);
-//
-//            try {
-//                Message message = Message.obtain(null, ScheduleService.MSG_NETWORK_CONNECT);
-//                message.replyTo = serviceMessenger;
-//                serviceMessenger.send(message);
-//            } catch (RemoteException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
 
 //    private boolean isNetworkAvailableAndConnected() {
 //        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);

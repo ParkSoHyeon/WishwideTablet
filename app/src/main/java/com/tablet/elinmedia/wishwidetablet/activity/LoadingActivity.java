@@ -2,6 +2,7 @@ package com.tablet.elinmedia.wishwidetablet.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import com.tablet.elinmedia.wishwidetablet.common.BaseApplication;
 import com.tablet.elinmedia.wishwidetablet.R;
+import com.tablet.elinmedia.wishwidetablet.common.NetworkStateMonitoringReceiver;
 import com.tablet.elinmedia.wishwidetablet.common.SharedPreferencesConstant;
 import com.tablet.elinmedia.wishwidetablet.common.StopTaskService;
 import com.tablet.elinmedia.wishwidetablet.fragment.PermissionDialogFragment;
@@ -32,6 +34,7 @@ public class LoadingActivity
         setContentView(R.layout.activity_loading);
 
         startService(new Intent(this, StopTaskService.class));
+
 
         //파일 권한 확인
 //        mPermissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -62,6 +65,8 @@ public class LoadingActivity
             //있으면 WebServer 로그인 인증
             Log.d(TAG, "자동 로그인 Webserver 접속 시도");
             NodeSocketClient nodeSocketClient = NodeSocketClient.getSocketInstance();
+            nodeSocketClient.setmActivity(this);
+//            nodeSocketClient.disconnectSocket();
             nodeSocketClient.setManagerId(managerId);
             nodeSocketClient.setManagerPassword(managerPassword);
             nodeSocketClient.setDeviceId(deviceId);
@@ -69,7 +74,6 @@ public class LoadingActivity
 
             nodeSocketClient.connectSocket();
         }
-//        }
     }
 
 

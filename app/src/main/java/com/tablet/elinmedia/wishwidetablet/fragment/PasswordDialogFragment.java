@@ -48,8 +48,6 @@ public class PasswordDialogFragment extends DialogFragment {
         mBtnOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 if (nodeSocketClient.getManagerPassword().equals(mEdtPassword.getText().toString())) {
                    //저장되어 있는 아이디, 비밀번호, 디바이스 아이디 정보 clear
                     SharedPreferences sharedPreferences = nodeSocketClient.getmSharedPreferences();

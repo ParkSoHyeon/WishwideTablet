@@ -653,10 +653,6 @@ public class NodeSocketClient implements NodeSocketClientConstant, SharedPrefere
         this.mActivity = mActivity;
     }
 
-    public void progressON() {
-        BaseApplication.getInstance().progressON(mActivity, null);
-    }
-
     public void progressON(String message) {
         BaseApplication.getInstance().progressON(mActivity, message);
     }

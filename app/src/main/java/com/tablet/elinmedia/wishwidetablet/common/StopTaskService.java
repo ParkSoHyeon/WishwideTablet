@@ -2,15 +2,27 @@ package com.tablet.elinmedia.wishwidetablet.common;
 
 import android.app.Service;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.IBinder;
 import android.util.Log;
 import com.tablet.elinmedia.wishwidetablet.socket.NodeSocketClient;
 
 public class StopTaskService extends Service {
     private static final String TAG = "StopTaskService";
+
+    private NetworkStateMonitoringReceiver mNetworkStateMonitoringReceiver;
     @Override
     public IBinder onBind(Intent intent) {
         return null;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        mNetworkStateMonitoringReceiver = new NetworkStateMonitoringReceiver();
+        registerReceiver(mNetworkStateMonitoringReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
     }
 
     @Override
@@ -25,6 +37,10 @@ public class StopTaskService extends Service {
         }
         else {
             nodeSocketClient.clearResource();
+        }
+
+        if (mNetworkStateMonitoringReceiver != null) {
+            unregisterReceiver(mNetworkStateMonitoringReceiver);
         }
 
         this.stopSelf();

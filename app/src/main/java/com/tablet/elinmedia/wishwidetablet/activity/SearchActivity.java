@@ -1,6 +1,7 @@
 package com.tablet.elinmedia.wishwidetablet.activity;
 
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import com.tablet.elinmedia.wishwidetablet.fragment.HeaderFragment;
@@ -32,6 +33,18 @@ public class SearchActivity extends WishwideFragmentActivity {
 
         return null;
     }
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_DOWN) {
+            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                return true;
+            }
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
 
     @Override
     protected Fragment createContentFragment() {

@@ -41,7 +41,7 @@ public class HeaderFragment extends Fragment implements WishwidePath {
         tvHeaderTitle = (TextView) headerView.findViewById(R.id.tv_header_title);
         ibtnLogout = (ImageButton) headerView.findViewById(R.id.ibtn_logout);
 
-
+        NodeSocketClient.getSocketInstance().setmActivity(getActivity());
         Partner partner = NodeSocketClient.getSocketInstance().getPartner();
         Picasso.with(getActivity()).load(partner.getImgLogoUrl())
                 .placeholder(R.drawable.logo)
@@ -51,22 +51,6 @@ public class HeaderFragment extends Fragment implements WishwidePath {
         tvHeaderTitle.setText(mTitle);
         ibtnLogout.setVisibility(View.VISIBLE);
 
-//        Customer customer = NodeSocketClient.getSocketInstance().getCustomer();
-//
-//        if (customer != null) {
-//            tvSession.setText(customer.getStrCustomerPhone());
-//            tvSession.setVisibility(View.VISIBLE);
-//            ibtnLogout.setVisibility(View.VISIBLE);
-//        }
-//        else {
-//            tvSession.setText("");
-//            tvSession.setVisibility(View.GONE);
-//            ibtnLogout.setVisibility(View.GONE);
-//        }
-
-//        tvSession.setText("01012345678");
-//        tvSession.setVisibility(View.VISIBLE);
-//        ibtnLogout.setVisibility(View.VISIBLE);
 
         //로그아웃 버튼 리스너
         ibtnLogout.setOnClickListener(new View.OnClickListener() {

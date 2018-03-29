@@ -133,14 +133,14 @@ public class CustomerLoginFragment extends Fragment implements NodeSocketClientC
                     if (NodeSocketClient.isSocketConnected) {
                         Log.d(TAG, "서버와 연결 됨");
 
-                        nodeSocketClient.setmActivity(getActivity());
+//                        nodeSocketClient.setmActivity(getActivity());
                         nodeSocketClient.setCustomerPhone(purePhone);
                         nodeSocketClient.requestCustomerLogin(purePhone);
                     }
                     else {
                         Log.d(TAG, "서버와 연결 안됨");
                         nodeSocketClient.connectSocket();
-                        nodeSocketClient.setmActivity(getActivity());
+//                        nodeSocketClient.setmActivity(getActivity());
                         nodeSocketClient.setCustomerPhone(purePhone);
                         nodeSocketClient.requestCustomerLogin(purePhone);
                     }
