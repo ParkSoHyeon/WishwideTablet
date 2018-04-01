@@ -3,11 +3,14 @@ package com.tablet.elinmedia.wishwidetablet.fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -33,6 +36,14 @@ public class GiftBoxFragment extends Fragment implements NodeSocketClientConstan
     private Button mBtnGoSearch, mBtnLogout;
     private GiftboxAdapter mGiftboxAdapter;
 
+
+    private Timer mTimer;
+    private TextView mTvTime;
+    private View mTimerDialogView;
+
+    private int mReadyCount = 0;
+    private int mTimeCount = 5;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +57,62 @@ public class GiftBoxFragment extends Fragment implements NodeSocketClientConstan
         mBtnGoSearch = (Button) giftBoxView.findViewById(R.id.btn_go_search);
         mBtnLogout = (Button) giftBoxView.findViewById(R.id.btn_logout);
         mGiftBoxRecyclerView.setLayoutManager(new LinearLayoutManager((getActivity())));
+
+
+        giftBoxView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    Log.d(TAG, "onTouchEvent()...");
+
+                    mReadyCount = 5;
+                    mTimeCount = 5;
+                    mTvTime.setText(mTimeCount + "초");
+
+                }
+
+                return true;
+            }
+        });
+
+
+//        ViewGroup.LayoutParams layoutParamsControl = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        mTimerDialogView = inflater.inflate(R.layout.timer_dialog, container, false);
+        mTimerDialogView.setVisibility(View.GONE);
+        container.addView(mTimerDialogView);
+
+        mTvTime = (TextView) mTimerDialogView.findViewById(R.id.tv_time);
+
+        mTimer = new Timer();
+        mTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                new Handler(Looper.getMainLooper()).post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (mReadyCount < 1) {
+                            showCard();
+
+                            if (mTimeCount < 1) {
+                                mTimer.cancel();
+                                mTimer = null;
+
+                                startActivity(new Intent(getActivity(), HomeActivity.class));
+                            }
+
+                            mTvTime.setText("" + mTimeCount);
+                            mTimeCount--;
+                        } else {
+                            mReadyCount--;
+                            hideCard();
+                        }
+
+                    }
+                });
+
+            }
+        }, 3000, 1000);
+
 
         final Partner partner = NodeSocketClient.getSocketInstance().getPartner();
 
@@ -120,8 +187,7 @@ public class GiftBoxFragment extends Fragment implements NodeSocketClientConstan
             if (benefits.get(i).getiBenefitUseCode() == 0) {
                 //사용 가능
                 availableBenefits.add(benefits.get(i));
-            }
-            else if (benefits.get(i).getiBenefitUseCode() == 1){
+            } else if (benefits.get(i).getiBenefitUseCode() == 1) {
                 //사용 완료
                 unavailableBenefits.add(benefits.get(i));
             }
@@ -162,8 +228,7 @@ public class GiftBoxFragment extends Fragment implements NodeSocketClientConstan
 
             if (mBenefit.getStrBenefitTypeCode().equals("coupon")) {
                 imgBenefitType.setImageResource(R.drawable.benefit_coupon);
-            }
-            else if (mBenefit.getStrBenefitTypeCode().equals("gift")) {
+            } else if (mBenefit.getStrBenefitTypeCode().equals("gift")) {
                 imgBenefitType.setImageResource(R.drawable.benefit_gift);
             }
             Picasso.with(getActivity()).load(mBenefit.getStrBenefitImageUrl())
@@ -193,8 +258,7 @@ public class GiftBoxFragment extends Fragment implements NodeSocketClientConstan
                 tvBenefitUseDate.setText("");
 
 
-            }
-            else {
+            } else {
                 //사용 완료
                 imgBenefitUse.setMinimumWidth(150);
                 imgBenefitUse.setMinimumHeight(100);
@@ -205,6 +269,37 @@ public class GiftBoxFragment extends Fragment implements NodeSocketClientConstan
             }
 
         }
+    }
+
+
+    void showCard() {
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                // if scard is already visible with same VuMark, do nothing
+                if (mTimerDialogView.getVisibility() == View.VISIBLE) {
+                    return;
+                }
+
+                mTimerDialogView.bringToFront();
+                mTimerDialogView.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    void hideCard() {
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                // if card not visible, do nothing
+                if (mTimerDialogView.getVisibility() != View.VISIBLE) {
+                    return;
+                }
+
+                mTimerDialogView.setVisibility(View.INVISIBLE);
+                // mUILayout.invalidate();
+            }
+        });
     }
 
     private void showDialog(String msg) {

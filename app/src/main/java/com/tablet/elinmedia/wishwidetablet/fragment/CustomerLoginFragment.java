@@ -86,6 +86,13 @@ public class CustomerLoginFragment extends Fragment implements NodeSocketClientC
             });
         }
 
+        edtPhone.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return true;
+            }
+        });
+
         //EditText 창 눌러도 키보드 안나타나게..
 //        edtPhone.setClickable(false);
         edtPhone.setCursorVisible(false);
@@ -241,6 +248,7 @@ public class CustomerLoginFragment extends Fragment implements NodeSocketClientC
 //            editText.setSelection(iCurrentCursor - 1);
 //        }
     }
+
 
 
 }

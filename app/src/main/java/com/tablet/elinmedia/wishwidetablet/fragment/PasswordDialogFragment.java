@@ -1,5 +1,6 @@
 package com.tablet.elinmedia.wishwidetablet.fragment;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -16,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import com.tablet.elinmedia.wishwidetablet.R;
 import com.tablet.elinmedia.wishwidetablet.activity.LoginActivity;
+import com.tablet.elinmedia.wishwidetablet.common.BaseApplication;
 import com.tablet.elinmedia.wishwidetablet.socket.NodeSocketClient;
 
 public class PasswordDialogFragment extends DialogFragment {
@@ -50,10 +52,10 @@ public class PasswordDialogFragment extends DialogFragment {
             public void onClick(View v) {
                 if (nodeSocketClient.getManagerPassword().equals(mEdtPassword.getText().toString())) {
                    //저장되어 있는 아이디, 비밀번호, 디바이스 아이디 정보 clear
-                    SharedPreferences sharedPreferences = nodeSocketClient.getmSharedPreferences();
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.clear();
-                    editor.commit();
+//                    SharedPreferences sharedPreferences = nodeSocketClient.getmSharedPreferences();
+//                    SharedPreferences.Editor editor = sharedPreferences.edit();
+//                    editor.clear();
+//                    editor.commit();
 
                     //소켓 통신 연결 끊기 및 자원 반납
                     if (NodeSocketClient.isSocketConnected) {
@@ -65,10 +67,18 @@ public class PasswordDialogFragment extends DialogFragment {
                     }
 
                     //로그인 페이지로 이동
-                    Intent intent = new Intent(getActivity(), LoginActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+//                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    startActivity(intent);
+
+                    //앱 종료
+//                    Context context = BaseApplication.getInstance().getmContext();
+//                    if (context instanceof Activity) {
+//                        ((Activity) context).finish();
+//                    }
+                    System.exit(0);
+
                 }
                 else {
                     showDialog("비밀번호를 다시 확인해주세요.");

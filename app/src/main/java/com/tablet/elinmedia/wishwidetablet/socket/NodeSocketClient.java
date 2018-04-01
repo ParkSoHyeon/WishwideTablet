@@ -69,6 +69,7 @@ public class NodeSocketClient implements NodeSocketClientConstant, SharedPrefere
         return nodeSocketClient;
     }
 
+    //자원 반납
     public void clearResource() {
         mActivity = null;
         mSocket = null;
@@ -482,7 +483,8 @@ public class NodeSocketClient implements NodeSocketClientConstant, SharedPrefere
 
 
     //선물함 정보 JSON 파싱
-    private List<Benefit> parseJSONGiftBox(String jsonData) {
+    private List<Benefit>
+    parseJSONGiftBox(String jsonData) {
         Log.i(TAG, "json 데이터 확인: " + jsonData);
 
 //        BenefitLab.clearResource();
