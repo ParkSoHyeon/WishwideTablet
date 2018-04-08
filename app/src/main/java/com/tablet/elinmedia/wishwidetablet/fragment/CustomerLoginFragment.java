@@ -7,9 +7,7 @@ import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.telephony.PhoneNumberUtils;
 import android.text.InputType;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.*;
 import com.tablet.elinmedia.wishwidetablet.R;
 import com.tablet.elinmedia.wishwidetablet.socket.NodeSocketClient;
@@ -42,6 +40,7 @@ public class CustomerLoginFragment extends Fragment implements NodeSocketClientC
     private Button btnDelete, btnOk;
     private int i;
 
+    private GestureDetector mGestureDetector;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,10 +85,27 @@ public class CustomerLoginFragment extends Fragment implements NodeSocketClientC
             });
         }
 
+        //prevent long click
         edtPhone.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
                 return true;
+            }
+        });
+
+        //prevent double click
+        mGestureDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
+            @Override
+            public boolean onDoubleTap(MotionEvent e) {
+                return true;
+            }
+        });
+
+        edtPhone.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return mGestureDetector.onTouchEvent(event);
+
             }
         });
 

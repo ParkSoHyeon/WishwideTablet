@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import com.tablet.elinmedia.wishwidetablet.R;
+import com.tablet.elinmedia.wishwidetablet.socket.NodeSocketClient;
 
 public class PermissionDialogFragment extends DialogFragment {
     public final static String DIALOG_TAG = "com.elinmedia.adwide.common.PermissionDialogFragment";
@@ -31,6 +32,13 @@ public class PermissionDialogFragment extends DialogFragment {
                 .setPositiveButton(R.string.dialog_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        NodeSocketClient nodeSocketClient = NodeSocketClient.getSocketInstance();
+
+                        if (NodeSocketClient.isSocketConnected) {
+                            nodeSocketClient.disconnectSocket();
+                            nodeSocketClient.clearResource();
+                        }
+
                         //앱 종료
                         if (mContext instanceof Activity) {
                             ((Activity) mContext).finish();

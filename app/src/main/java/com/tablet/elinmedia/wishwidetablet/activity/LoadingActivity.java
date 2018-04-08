@@ -35,6 +35,7 @@ public class LoadingActivity
 
         startService(new Intent(this, StopTaskService.class));
 
+        BaseApplication.getInstance().setmContext(getApplicationContext());
 
         //파일 권한 확인
 //        mPermissionCheck = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -45,7 +46,7 @@ public class LoadingActivity
 //        }
 //        else {
         mSharedPreferences = this.getSharedPreferences(PREFERENCES_NAME, Context.MODE_PRIVATE);
-        BaseApplication.getInstance().setmContext(getApplicationContext());
+
 
         //preferences shared 사용해 로그인 이력 있는지 확인
         String managerId = mSharedPreferences.getString(MANAGER_ID_KEY, "");
@@ -102,5 +103,11 @@ public class LoadingActivity
 
     public static boolean checkPermission() {
         return mPermissionCheck == PackageManager.PERMISSION_GRANTED;
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.d(TAG, TAG + " onDestroy()...");
+        super.onDestroy();
     }
 }

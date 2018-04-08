@@ -18,12 +18,12 @@ import java.util.TimerTask;
 public class SearchActivity extends WishwideFragmentActivity {
     private static final String TAG = "SearchActivity";
 
-    private Timer mTimer;
-    private TextView mTvTime;
-    private View mTimerDialogView;
-
-    private int mReadyCount = 0;
-    private int mTimeCount = 5;
+//    private Timer mTimer;
+//    private TextView mTvTime;
+//    private View mTimerDialogView;
+//
+//    private int mReadyCount = 0;
+//    private int mTimeCount = 5;
 
     @Override
     protected Fragment createHeaderFragment() {
@@ -58,42 +58,42 @@ public class SearchActivity extends WishwideFragmentActivity {
 
         ViewGroup.LayoutParams layoutParamsControl = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         LayoutInflater inflater = getLayoutInflater();
-        mTimerDialogView = inflater.inflate(R.layout.timer_dialog, null);
-        mTimerDialogView.setVisibility(View.GONE);
-
-        addContentView(mTimerDialogView, layoutParamsControl);
-
-        mTvTime = (TextView) mTimerDialogView.findViewById(R.id.tv_time);
-
-        mTimer = new Timer();
-        mTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (mReadyCount < 1) {
-                            showCard();
-
-                            if (mTimeCount < 1) {
-                                mTimer.cancel();
-                                mTimer = null;
-
-                                startActivity(new Intent(SearchActivity.this, HomeActivity.class));
-                            }
-
-                            mTvTime.setText("" + mTimeCount);
-                            mTimeCount--;
-                        } else {
-                            mReadyCount--;
-                            hideCard();
-                        }
-
-                    }
-                });
-
-            }
-        }, 5000, 1200);
+//        mTimerDialogView = inflater.inflate(R.layout.timer_dialog, null);
+//        mTimerDialogView.setVisibility(View.GONE);
+//
+//        addContentView(mTimerDialogView, layoutParamsControl);
+//
+//        mTvTime = (TextView) mTimerDialogView.findViewById(R.id.tv_time);
+//
+//        mTimer = new Timer();
+//        mTimer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        if (mReadyCount < 1) {
+//                            showCard();
+//
+//                            if (mTimeCount < 1) {
+//                                mTimer.cancel();
+//                                mTimer = null;
+//
+//                                startActivity(new Intent(SearchActivity.this, HomeActivity.class));
+//                            }
+//
+//                            mTvTime.setText(mTimeCount + "초");
+//                            mTimeCount--;
+//                        } else {
+//                            mReadyCount--;
+//                            hideCard();
+//                        }
+//
+//                    }
+//                });
+//
+//            }
+//        }, 5000, 1200);
 
         if (benefitTypeCode.equals("S")) {
             return new StampFragment();
@@ -103,50 +103,57 @@ public class SearchActivity extends WishwideFragmentActivity {
 
         return null;
     }
+//
+//
+//    @Override
+//    public boolean onTouchEvent(MotionEvent event) {
+//
+//        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+//            Log.d(TAG, "onTouchEvent()...");
+//
+//            mReadyCount = 5;
+//            mTimeCount = 5;
+//
+//            mTvTime.setText(mTimeCount + "초");
+//        }
+//
+//        return true;
+//    }
+//
+//    private void showCard() {
+//        runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                // if scard is already visible with same VuMark, do nothing
+//                if (mTimerDialogView.getVisibility() == View.VISIBLE) {
+//                    return;
+//                }
+//
+//                mTimerDialogView.bringToFront();
+//                mTimerDialogView.setVisibility(View.VISIBLE);
+//            }
+//        });
+//    }
+//
+//    private void hideCard() {
+//        runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                // if card not visible, do nothing
+//                if (mTimerDialogView.getVisibility() != View.VISIBLE) {
+//                    return;
+//                }
+//
+//                mTimerDialogView.setVisibility(View.INVISIBLE);
+//                // mUILayout.invalidate();
+//            }
+//        });
+//    }
 
 
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
-
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            Log.d(TAG, "onTouchEvent()...");
-
-            mReadyCount = 5;
-            mTimeCount = 5;
-
-            mTvTime.setText(mTimeCount + "초");
-        }
-
-        return true;
-    }
-
-    private void showCard() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                // if scard is already visible with same VuMark, do nothing
-                if (mTimerDialogView.getVisibility() == View.VISIBLE) {
-                    return;
-                }
-
-                mTimerDialogView.bringToFront();
-                mTimerDialogView.setVisibility(View.VISIBLE);
-            }
-        });
-    }
-
-    private void hideCard() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                // if card not visible, do nothing
-                if (mTimerDialogView.getVisibility() != View.VISIBLE) {
-                    return;
-                }
-
-                mTimerDialogView.setVisibility(View.INVISIBLE);
-                // mUILayout.invalidate();
-            }
-        });
+    protected void onDestroy() {
+        Log.d(TAG, TAG + " onDestroy()...");
+        super.onDestroy();
     }
 }

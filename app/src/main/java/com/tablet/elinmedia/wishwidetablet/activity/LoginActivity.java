@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.tablet.elinmedia.wishwidetablet.R;
+import com.tablet.elinmedia.wishwidetablet.common.BaseApplication;
 import com.tablet.elinmedia.wishwidetablet.common.SharedPreferencesConstant;
 import com.tablet.elinmedia.wishwidetablet.fragment.MessageDialogFragment;
 import com.tablet.elinmedia.wishwidetablet.socket.NodeSocketClient;
@@ -79,6 +80,7 @@ public class LoginActivity
                 if (NodeSocketClient.isSocketConnected == true) {
                     Log.d(TAG, "isSocketConnected true");
                     nodeSocketClient.requestPartnerLogin();
+
                 }
                 else {
                     Log.d(TAG, "isSocketConnected false");
@@ -91,9 +93,9 @@ public class LoginActivity
         mBtnStampSignIn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                mEdtId.setText("gupnechicken");
-                mEdtPassword.setText("1q2w3e4r");
-                mEdtDeviceId.setText("WW_DI5");
+                mEdtId.setText("sulbingHong");
+                mEdtPassword.setText("1234qwer");
+                mEdtDeviceId.setText("WW_DI10");
             }
         });
 
@@ -101,7 +103,7 @@ public class LoginActivity
             @Override
             public void onClick(View v) {
                 mEdtId.setText("starbucks");
-                mEdtPassword.setText("1q2w3e4r");
+                mEdtPassword.setText("1234qwer");
                 mEdtDeviceId.setText("WW_DI8");
             }
         });
@@ -204,7 +206,7 @@ public class LoginActivity
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            showProgress(true);
+//            showProgress(true);
         }
     }
 
@@ -239,18 +241,18 @@ public class LoginActivity
                 }
             });
 
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mProgressView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
+//            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+//            mProgressView.animate().setDuration(shortAnimTime).alpha(
+//                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+//                @Override
+//                public void onAnimationEnd(Animator animation) {
+//                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+//                }
+//            });
         } else {
             // The ViewPropertyAnimator APIs are not available, so simply show
             // and hide the relevant UI components.
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+//            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
             mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
         }
     }
@@ -259,6 +261,12 @@ public class LoginActivity
         MessageDialogFragment messageDialogFragment = MessageDialogFragment.newInstance();
         messageDialogFragment.setmMsg(msg);
         messageDialogFragment.show(getSupportFragmentManager(), MessageDialogFragment.DIALOG_TAG);
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.d(TAG, TAG + " onDestroy()...");
+        super.onDestroy();
     }
 }
 

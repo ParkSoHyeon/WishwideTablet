@@ -29,6 +29,52 @@ public class GiftBoxActivity extends WishwideFragmentActivity {
 
 
     @Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+//        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+//            Log.d(TAG, "onTouchEvent()...");
+//
+//            mReadyCount = 3;
+//            mTimeCount = 5;
+//            mTvTime.setText(mTimeCount + "초");
+//
+//        }
+
+        return true;
+    }
+//
+//    void showCard() {
+//        runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                // if scard is already visible with same VuMark, do nothing
+//                if (mTimerDialogView.getVisibility() == View.VISIBLE) {
+//                    return;
+//                }
+//
+//                mTimerDialogView.bringToFront();
+//                mTimerDialogView.setVisibility(View.VISIBLE);
+//            }
+//        });
+//    }
+//
+//    void hideCard() {
+//        runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                // if card not visible, do nothing
+//                if (mTimerDialogView.getVisibility() != View.VISIBLE) {
+//                    return;
+//                }
+//
+//                mTimerDialogView.setVisibility(View.INVISIBLE);
+//                // mUILayout.invalidate();
+//            }
+//        });
+//    }
+
+
+    @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (event.getAction() == KeyEvent.ACTION_DOWN) {
             if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -36,5 +82,12 @@ public class GiftBoxActivity extends WishwideFragmentActivity {
             }
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        Log.d(TAG, TAG + " onDestroy()...");
+        super.onDestroy();
     }
 }

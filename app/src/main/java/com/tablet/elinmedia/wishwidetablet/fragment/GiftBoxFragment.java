@@ -26,6 +26,7 @@ import com.tablet.elinmedia.wishwidetablet.vo.Benefit;
 import com.tablet.elinmedia.wishwidetablet.vo.BenefitLab;
 import com.tablet.elinmedia.wishwidetablet.vo.Partner;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -36,10 +37,10 @@ public class GiftBoxFragment extends Fragment implements NodeSocketClientConstan
     private Button mBtnGoSearch, mBtnLogout;
     private GiftboxAdapter mGiftboxAdapter;
 
-
-    private Timer mTimer;
-    private TextView mTvTime;
-    private View mTimerDialogView;
+//
+//    private Timer mTimer;
+//    private TextView mTvTime;
+//    private View mTimerDialogView;
 
     private int mReadyCount = 0;
     private int mTimeCount = 5;
@@ -59,59 +60,59 @@ public class GiftBoxFragment extends Fragment implements NodeSocketClientConstan
         mGiftBoxRecyclerView.setLayoutManager(new LinearLayoutManager((getActivity())));
 
 
-        giftBoxView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_DOWN) {
-                    Log.d(TAG, "onTouchEvent()...");
-
-                    mReadyCount = 5;
-                    mTimeCount = 5;
-                    mTvTime.setText(mTimeCount + "초");
-
-                }
-
-                return true;
-            }
-        });
+//        giftBoxView.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+//                    Log.d(TAG, "onTouchEvent()...");
+//
+//                    mReadyCount = 5;
+//                    mTimeCount = 5;
+//                    mTvTime.setText(mTimeCount + "초");
+//
+//                }
+//
+//                return true;
+//            }
+//        });
 
 
 //        ViewGroup.LayoutParams layoutParamsControl = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        mTimerDialogView = inflater.inflate(R.layout.timer_dialog, container, false);
-        mTimerDialogView.setVisibility(View.GONE);
-        container.addView(mTimerDialogView);
-
-        mTvTime = (TextView) mTimerDialogView.findViewById(R.id.tv_time);
-
-        mTimer = new Timer();
-        mTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                new Handler(Looper.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (mReadyCount < 1) {
-                            showCard();
-
-                            if (mTimeCount < 1) {
-                                mTimer.cancel();
-                                mTimer = null;
-
-                                startActivity(new Intent(getActivity(), HomeActivity.class));
-                            }
-
-                            mTvTime.setText("" + mTimeCount);
-                            mTimeCount--;
-                        } else {
-                            mReadyCount--;
-                            hideCard();
-                        }
-
-                    }
-                });
-
-            }
-        }, 3000, 1000);
+//        mTimerDialogView = inflater.inflate(R.layout.timer_dialog, container, false);
+//        mTimerDialogView.setVisibility(View.GONE);
+//        container.addView(mTimerDialogView);
+//
+//        mTvTime = (TextView) mTimerDialogView.findViewById(R.id.tv_time);
+//
+//        mTimer = new Timer();
+//        mTimer.schedule(new TimerTask() {
+//            @Override
+//            public void run() {
+//                new Handler(Looper.getMainLooper()).post(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        if (mReadyCount < 1) {
+//                            showCard();
+//
+//                            if (mTimeCount < 1) {
+//                                mTimer.cancel();
+//                                mTimer = null;
+//
+//                                startActivity(new Intent(getActivity(), HomeActivity.class));
+//                            }
+//
+//                            mTvTime.setText(mTimeCount + "초");
+//                            mTimeCount--;
+//                        } else {
+//                            mReadyCount--;
+//                            hideCard();
+//                        }
+//
+//                    }
+//                });
+//
+//            }
+//        }, 3000, 1000);
 
 
         final Partner partner = NodeSocketClient.getSocketInstance().getPartner();
@@ -132,7 +133,7 @@ public class GiftBoxFragment extends Fragment implements NodeSocketClientConstan
                 //도장/포인트 조회화면으로 이동
                 Intent intent = new Intent(getActivity(), SearchActivity.class);
                 intent.putExtra("responseCode", NodeSocketClient.SUCCESS_RESPONSE_CODE);
-                intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });
@@ -144,7 +145,7 @@ public class GiftBoxFragment extends Fragment implements NodeSocketClientConstan
                 //고객 로그아웃
                 NodeSocketClient.getSocketInstance().resetCustomerInfo();
                 Intent intent = new Intent(getActivity(), HomeActivity.class);
-                intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
@@ -232,12 +233,10 @@ public class GiftBoxFragment extends Fragment implements NodeSocketClientConstan
                 imgBenefitType.setImageResource(R.drawable.benefit_gift);
             }
             Picasso.with(getActivity()).load(mBenefit.getStrBenefitImageUrl())
-                    .placeholder(R.drawable.logo)
-                    .error(R.drawable.logo)
                     .into(imgBenefitItem);
             tvBenefitTitle.setText(mBenefit.getStrBenefitTitle());
             tvBenefitDescription.setText(mBenefit.getStrBenefitDescription());
-            tvBenefitExpire.setText(" ~ " + mBenefit.getBenefitFinishDate());
+            tvBenefitExpire.setText(" ~ " + mBenefit.getBenefitFinishDate() + "까지");
 
             imgBenefitUse.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -251,7 +250,7 @@ public class GiftBoxFragment extends Fragment implements NodeSocketClientConstan
 
             if (mBenefit.getiBenefitUseCode() == 0) {
                 //사용 가능
-                imgBenefitUse.setMinimumWidth(150);
+                imgBenefitUse.setMinimumWidth(250);
                 imgBenefitUse.setMinimumHeight(100);
                 imgBenefitUse.setImageResource(R.drawable.benefit_available);
                 tvBenefitUseDate.setVisibility(View.GONE);
@@ -260,7 +259,7 @@ public class GiftBoxFragment extends Fragment implements NodeSocketClientConstan
 
             } else {
                 //사용 완료
-                imgBenefitUse.setMinimumWidth(150);
+                imgBenefitUse.setMinimumWidth(250);
                 imgBenefitUse.setMinimumHeight(100);
                 imgBenefitUse.setImageResource(R.drawable.benefit_unavailable);
                 tvBenefitUseDate.setVisibility(View.VISIBLE);
@@ -271,36 +270,42 @@ public class GiftBoxFragment extends Fragment implements NodeSocketClientConstan
         }
     }
 
+    private String makeStringComma(int num) {
+        DecimalFormat decimalFormat = new DecimalFormat("#,###");
 
-    void showCard() {
-        new Handler(Looper.getMainLooper()).post(new Runnable() {
-            @Override
-            public void run() {
-                // if scard is already visible with same VuMark, do nothing
-                if (mTimerDialogView.getVisibility() == View.VISIBLE) {
-                    return;
-                }
-
-                mTimerDialogView.bringToFront();
-                mTimerDialogView.setVisibility(View.VISIBLE);
-            }
-        });
+        return decimalFormat.format(num);
     }
 
-    void hideCard() {
-        new Handler(Looper.getMainLooper()).post(new Runnable() {
-            @Override
-            public void run() {
-                // if card not visible, do nothing
-                if (mTimerDialogView.getVisibility() != View.VISIBLE) {
-                    return;
-                }
 
-                mTimerDialogView.setVisibility(View.INVISIBLE);
-                // mUILayout.invalidate();
-            }
-        });
-    }
+//    void showCard() {
+//        new Handler(Looper.getMainLooper()).post(new Runnable() {
+//            @Override
+//            public void run() {
+//                // if scard is already visible with same VuMark, do nothing
+//                if (mTimerDialogView.getVisibility() == View.VISIBLE) {
+//                    return;
+//                }
+//
+//                mTimerDialogView.bringToFront();
+//                mTimerDialogView.setVisibility(View.VISIBLE);
+//            }
+//        });
+//    }
+
+//    void hideCard() {
+//        new Handler(Looper.getMainLooper()).post(new Runnable() {
+//            @Override
+//            public void run() {
+//                // if card not visible, do nothing
+//                if (mTimerDialogView.getVisibility() != View.VISIBLE) {
+//                    return;
+//                }
+//
+//                mTimerDialogView.setVisibility(View.INVISIBLE);
+//                // mUILayout.invalidate();
+//            }
+//        });
+//    }
 
     private void showDialog(String msg) {
         MessageDialogFragment messageDialogFragment = MessageDialogFragment.newInstance();

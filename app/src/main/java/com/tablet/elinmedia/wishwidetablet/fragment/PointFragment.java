@@ -66,7 +66,7 @@ public class PointFragment extends Fragment implements NodeSocketClientConstant 
                 //고객 로그아웃
                 NodeSocketClient.getSocketInstance().resetCustomerInfo();
                 Intent intent = new Intent(getActivity(), HomeActivity.class);
-                intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);

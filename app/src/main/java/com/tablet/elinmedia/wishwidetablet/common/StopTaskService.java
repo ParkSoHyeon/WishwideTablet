@@ -12,6 +12,7 @@ public class StopTaskService extends Service {
     private static final String TAG = "StopTaskService";
 
     private NetworkStateMonitoringReceiver mNetworkStateMonitoringReceiver;
+
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -26,9 +27,10 @@ public class StopTaskService extends Service {
     }
 
     @Override
-    public void onTaskRemoved(Intent rootIntent) {
-        super.onTaskRemoved(rootIntent);
-        Log.d(TAG, "onTaskRemoved()...");
+    public void onDestroy() {
+        Log.d(TAG, TAG + " onDestroy()");
+        super.onDestroy();
+
         NodeSocketClient nodeSocketClient = NodeSocketClient.getSocketInstance();
 
         if (NodeSocketClient.isSocketConnected) {
@@ -42,6 +44,13 @@ public class StopTaskService extends Service {
         if (mNetworkStateMonitoringReceiver != null) {
             unregisterReceiver(mNetworkStateMonitoringReceiver);
         }
+    }
+
+    @Override
+    public void onTaskRemoved(Intent rootIntent) {
+        super.onTaskRemoved(rootIntent);
+        Log.d(TAG, "onTaskRemoved()...");
+
 
         this.stopSelf();
     }

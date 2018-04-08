@@ -35,14 +35,14 @@
 
             <ImageView
                     android:id="@+id/img_benefit_item"
-                    android:layout_width="200dp"
+                    android:layout_width="190dp"
                     android:layout_height="180dp"/>
         </LinearLayout>
 
         <!-- 혜택 내용 -->
         <LinearLayout
-                android:paddingLeft="@dimen/activity_margin_16"
-                android:layout_weight="4"
+                android:paddingLeft="@dimen/activity_margin_24"
+                android:layout_weight="5"
                 android:layout_width="0px"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
@@ -68,6 +68,7 @@
                     android:gravity="center_vertical">
                 <TextView
                         android:id="@+id/tv_benefit_description"
+                        android:textSize="@dimen/text_size_20"
                         android:maxLines="1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
@@ -91,9 +92,10 @@
 
         <!-- 혜택사용여부 -->
         <LinearLayout
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:layout_width="0px"
                 android:layout_height="match_parent"
+                android:paddingRight="@dimen/activity_margin_16"
                 android:orientation="vertical"
                 android:gravity="center">
             <ImageView
@@ -101,6 +103,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             <TextView
+
                     android:textSize="@dimen/text_size_20"
                     android:id="@+id/tv_benefit_use_date"
                     android:layout_width="wrap_content"

@@ -5,11 +5,14 @@ import android.app.Application;
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Looper;
 import android.support.v7.app.AppCompatDialog;
 import android.text.TextUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.tablet.elinmedia.wishwidetablet.R;
+
+import java.util.logging.Handler;
 
 public class BaseApplication extends Application {
 

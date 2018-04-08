@@ -306,6 +306,7 @@ public class NodeSocketClient implements NodeSocketClientConstant, SharedPrefere
             @Override
             public void call(Object... args) {
                 //파트너 로그인 성공 시, MainActivity 이동 및 파트너 정보 저장
+                progressOFF();
                 JSONObject data = (JSONObject) args[0];
                 Log.d(TAG, "파트너 로그인, 응답 코드 확인: " + data.toString());
 
