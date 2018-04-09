@@ -28,6 +28,8 @@ import org.json.JSONObject;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class NodeSocketClient implements NodeSocketClientConstant, SharedPreferencesConstant {
     private static final String TAG = "NodeSocketClient";
@@ -47,10 +49,19 @@ public class NodeSocketClient implements NodeSocketClientConstant, SharedPrefere
     private String managerId;
     private String managerPassword;
     private String customerPhone;
+
+
     private Partner partner;
     private Customer customer;
+
+
     private Benefit benefit;
     private BenefitLab benefitLab;
+
+
+    private Timer mTimer;
+    private int mTimeCount;
+
 
     public static boolean isSocketConnected = false;
 
@@ -69,6 +80,7 @@ public class NodeSocketClient implements NodeSocketClientConstant, SharedPrefere
         return nodeSocketClient;
     }
 
+
     //자원 반납
     public void clearResource() {
         mActivity = null;
@@ -84,6 +96,7 @@ public class NodeSocketClient implements NodeSocketClientConstant, SharedPrefere
         benefitLab = null;
         nodeSocketClient = null;
     }
+
 
     //소켓 설정
     public void initializeConfig() {
@@ -168,6 +181,13 @@ public class NodeSocketClient implements NodeSocketClientConstant, SharedPrefere
     private Emitter.Listener onPosReceived = new Emitter.Listener() {
         @Override
         public void call(Object... args) {
+            //타이머 종료
+            if (mTimer != null) {
+                mTimer.cancel();
+                mTimer = null;
+            }
+
+
             JSONObject data = (JSONObject) args[0];
             Log.d(TAG, "도장/포인트 적립 및 선물 사용, 응답 코드 확인: " + data.toString());
 
@@ -203,8 +223,9 @@ public class NodeSocketClient implements NodeSocketClientConstant, SharedPrefere
                             customer.setiPointAllCnt( objRoot.optInt("pointAllCnt"));
                         }
 
-                        intent.putExtra("responseCode", responseCode);
-                        intent.putExtra("benefitType", benefitType);
+                        customer.setStrSavingResponseCode(responseCode);
+                        customer.setStrCustomerBenefitType(benefitType);
+
 
                         BenefitLab.getInstance().clearResource();
                         BenefitLab.getInstance().setmBenefits(parseJSONGiftBox(data.toString().trim()));
@@ -222,12 +243,14 @@ public class NodeSocketClient implements NodeSocketClientConstant, SharedPrefere
                             customer.setiPointAllCnt( objRoot.optInt("pointAllCnt"));
                         }
 
-                        intent.putExtra("responseCode", responseCode);
-                        intent.putExtra("benefitType", benefitType);
+                        customer.setStrSavingResponseCode(responseCode);
+                        customer.setStrCustomerBenefitType(benefitType);
 
                         BenefitLab.getInstance().clearResource();
                         BenefitLab.getInstance().setmBenefits(parseJSONGiftBox(data.toString().trim()));
 
+                        break;
+                    case CANCLE_RESPONSE_CODE:
                         break;
                 }
 
@@ -286,6 +309,8 @@ public class NodeSocketClient implements NodeSocketClientConstant, SharedPrefere
         }
     };
 
+
+    //파트너 로그인 요청
     public void requestPartnerLogin() {
         JSONObject objLogin = new JSONObject();
 
@@ -405,6 +430,8 @@ public class NodeSocketClient implements NodeSocketClientConstant, SharedPrefere
         });
     }
 
+
+    //고객 로그인(조회) 요청
     public void requestCustomerLogin(String customerPhone) {
         Log.d(TAG, "고객 로그인 시도: " + customerPhone);
         this.customerPhone = customerPhone;
@@ -420,6 +447,7 @@ public class NodeSocketClient implements NodeSocketClientConstant, SharedPrefere
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
 
         mSocket.emit(REQUEST_CUSTOMER_LOGIN_EVENT_CODE, objData, new Ack() {
             @Override
@@ -445,13 +473,49 @@ public class NodeSocketClient implements NodeSocketClientConstant, SharedPrefere
                             Log.d(TAG, "로그인 성공");
 //                            intent = new Intent(mContext, SearchActivity.class);
 
-                            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                            //15초 동안 POS에서 응답을 주지 않으면 고객 로그인 화면으로 이동
+                            mTimer = new Timer();
+                            mTimeCount = 15;
+                            mTimer.schedule(new TimerTask() {
                                 @Override
                                 public void run() {
-                                    progressON("확인 중...");
-                                }
-                            });
+                                    Log.d(TAG, "남은 초: " + mTimeCount);
 
+                                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            progressON("확인 중...");
+
+                                            if (mTimeCount <= 1) {
+                                                mTimer.cancel();
+                                                mTimer = null;
+
+                                                try {
+                                                    resetCustomerInfo();
+                                                    Intent intent = new Intent(mActivity, HomeActivity.class);
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                                                    PendingIntent pendingIntent = PendingIntent.getActivity(
+                                                            mContext,
+                                                            0,
+                                                            intent,
+                                                            0);
+
+                                                    progressOFF();
+                                                    pendingIntent.send();
+                                                } catch (PendingIntent.CanceledException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
+
+                                            mTimeCount--;
+                                        }
+                                    });
+
+                                }
+                            }, 0,1200);
 
                             Customer info = new Customer();
 
@@ -483,7 +547,7 @@ public class NodeSocketClient implements NodeSocketClientConstant, SharedPrefere
     }
 
 
-    //선물함 정보 JSON 파싱
+    //쿠폰/선물함 정보 JSON 파싱
     private List<Benefit>
     parseJSONGiftBox(String jsonData) {
         Log.i(TAG, "json 데이터 확인: " + jsonData);
@@ -509,7 +573,7 @@ public class NodeSocketClient implements NodeSocketClientConstant, SharedPrefere
                 benefit.setBenefitNo(objCoupon.optInt("customer_couponproduct_no"));
                 benefit.setStrBenefitTypeCode(objCoupon.optString("type"));
                 benefit.setStrBenefitTitle(objCoupon.optString("coupon_title"));
-                benefit.setStrBenefitImageUrl(objCoupon.optString("product_image_url"));
+                benefit.setStrBenefitImageUrl(objCoupon.optString("coupon_image_url"));
                 if (objCoupon.optString("coupon_discount_type_code").equals("DCP")) {
                     description = objCoupon.optString("product_title") + " " + objCoupon.optString("coupon_discount_value") + "원 할인";
                 }
@@ -530,7 +594,7 @@ public class NodeSocketClient implements NodeSocketClientConstant, SharedPrefere
                 benefits.add(benefit);
             }
 
-            //쿠폰 리스트
+            //선물 리스트
             JSONObject objGifts = objRoot.optJSONObject("giftList");
 
             for (int i = 0; i < objRoot.optInt("giftCount"); i++) {
@@ -561,6 +625,8 @@ public class NodeSocketClient implements NodeSocketClientConstant, SharedPrefere
         return benefits;
     }
 
+
+    //고객 로그아웃(초기화)
     public void resetCustomerInfo() {
         customer = null;
         benefit = null;

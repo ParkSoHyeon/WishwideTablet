@@ -41,9 +41,15 @@ public class StampFragment extends Fragment implements NodeSocketClientConstant 
             R.id.img_stamp10
     };
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     @Override
@@ -60,8 +66,6 @@ public class StampFragment extends Fragment implements NodeSocketClientConstant 
             arrStampImgs[i] = (ImageView) stampView.findViewById(arrImgStampIds[i]);
         }
 
-
-        Intent intent = getActivity().getIntent();
         Customer customer = NodeSocketClient.getSocketInstance().getCustomer();
         Partner partner = NodeSocketClient.getSocketInstance().getPartner();
 
@@ -110,12 +114,12 @@ public class StampFragment extends Fragment implements NodeSocketClientConstant 
 //        guide = "01012345689" + "님은 지금까지 쿠폰 도장 " + stampNowCnt + "개를 모으셨습니다!!";
 //        guide = "01012345689" + "님, 축하드립니다!\n 모+으신 쿠폰 도장 19개는 선물함에 선물로 제공되었습니다.\n 쿠폰 도장 " + stampNowCnt + "개를 모으셨습니다!!";
 
-        switch (intent.getStringExtra("responseCode")) {
+        switch (customer.getStrSavingResponseCode()) {
             case SUCCESS_RESPONSE_CODE:
                 guide = customer.getStrCustomerPhone().replaceAll("(\\d{3})(\\d{3,4})(\\d{4})", "$1-****-$3") + "님은 현재까지 쿠폰 도장 " + stampNowCnt + "개를 모으셨습니다!!";
                 break;
             case SAVING_AND_COUPON_RESPONSE_CODE:
-                guide = "축하합니다!\n" + customer.getStrCustomerPhone().replaceAll("(\\d{3})(\\d{3,4})(\\d{4})", "$1-****-$3") + "님은 새로 쿠폰 도장 " + 1 + "개를 받으셨습니다. \n현재까지 적립된 쿠폰 도장 수는 총 " + stampNowCnt + "개 입니다!!";
+                guide = customer.getStrCustomerPhone().replaceAll("(\\d{3})(\\d{3,4})(\\d{4})", "$1-****-$3") + "님 축하합니다!!\n새로 쿠폰 도장 " + 1 + "개를 받으셨습니다. \n현재까지 적립된 쿠폰 도장 수는 총 " + stampNowCnt + "개 입니다!!";
                 break;
         }
 
@@ -129,6 +133,5 @@ public class StampFragment extends Fragment implements NodeSocketClientConstant 
     @Override
     public void onDestroy() {
         super.onDestroy();
-
     }
 }

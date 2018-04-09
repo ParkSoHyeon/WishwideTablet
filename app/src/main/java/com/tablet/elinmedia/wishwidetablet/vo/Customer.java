@@ -18,6 +18,7 @@ public class Customer {
     private int iPointInsCnt = 0;
     private int iPointUseCnt = 0;
     private int iPointAllCnt = 0;
+    private String strSavingResponseCode;
 
     private Customer(Context context) {
     }
@@ -38,6 +39,15 @@ public class Customer {
 //            sCustomer = null;
 //        }
 //    }
+
+
+    public String getStrSavingResponseCode() {
+        return strSavingResponseCode;
+    }
+
+    public void setStrSavingResponseCode(String strSavingResponseCode) {
+        this.strSavingResponseCode = strSavingResponseCode;
+    }
 
     public int getCustomerNo() {
         return customerNo;

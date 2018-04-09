@@ -7,9 +7,22 @@
         xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
+            android:orientation="vertical"
             android:layout_weight="5"
-            android:layout_width="1000dp"
+            android:layout_width="match_parent"
             android:layout_height="0px">
+        <FrameLayout
+                android:id="@+id/fl_none_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <TextView
+                    android:layout_gravity="center"
+                    android:text="지금까지 받은 쿠폰/선물이 없습니다."
+                    android:textSize="@dimen/activity_margin_45"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+        </FrameLayout>
+
         <android.support.v7.widget.RecyclerView
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/giftbox_recycler_view"

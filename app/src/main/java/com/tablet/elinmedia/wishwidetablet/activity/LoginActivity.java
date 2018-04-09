@@ -102,9 +102,9 @@ public class LoginActivity
         mBtnPointSignIn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                mEdtId.setText("starbucks");
+                mEdtId.setText("ediyaHong");
                 mEdtPassword.setText("1234qwer");
-                mEdtDeviceId.setText("WW_DI8");
+                mEdtDeviceId.setText("WW_DI14");
             }
         });
 

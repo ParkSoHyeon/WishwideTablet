@@ -36,6 +36,7 @@ public class GiftBoxFragment extends Fragment implements NodeSocketClientConstan
     private RecyclerView mGiftBoxRecyclerView;
     private Button mBtnGoSearch, mBtnLogout;
     private GiftboxAdapter mGiftboxAdapter;
+    private View mFlNoneList;
 
 //
 //    private Timer mTimer;
@@ -57,6 +58,7 @@ public class GiftBoxFragment extends Fragment implements NodeSocketClientConstan
         mGiftBoxRecyclerView = (RecyclerView) giftBoxView.findViewById(R.id.giftbox_recycler_view);
         mBtnGoSearch = (Button) giftBoxView.findViewById(R.id.btn_go_search);
         mBtnLogout = (Button) giftBoxView.findViewById(R.id.btn_logout);
+        mFlNoneList = giftBoxView.findViewById(R.id.fl_none_list);
         mGiftBoxRecyclerView.setLayoutManager(new LinearLayoutManager((getActivity())));
 
 
@@ -132,7 +134,6 @@ public class GiftBoxFragment extends Fragment implements NodeSocketClientConstan
             public void onClick(View v) {
                 //도장/포인트 조회화면으로 이동
                 Intent intent = new Intent(getActivity(), SearchActivity.class);
-                intent.putExtra("responseCode", NodeSocketClient.SUCCESS_RESPONSE_CODE);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
@@ -164,6 +165,16 @@ public class GiftBoxFragment extends Fragment implements NodeSocketClientConstan
         List<Benefit> benefits = benefitLab.getmBenefits();
         List<Benefit> availableBenefits = new ArrayList<>();
         List<Benefit> unavailableBenefits = new ArrayList<>();
+
+        Log.d(TAG, "선물 리스트: " + benefits.size());
+        if (benefits.size() < 1) {
+            Log.d(TAG, "");
+            mFlNoneList.setVisibility(View.VISIBLE);
+
+        }
+        else {
+            mFlNoneList.setVisibility(View.GONE);
+        }
 
         Collections.sort(benefits, new Comparator<Benefit>() {
             @Override
